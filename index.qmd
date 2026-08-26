@@ -1,32 +1,54 @@
 ---
-title: "[INSERT WORKSHOP SHORT TITLE]"
-subtitle: "[INSERT WORKSHOP EXTENDED TITLE]"
+title: "IST 400/600: Open Source Software Development Practicum"
+subtitle: "Syracuse University, Fall 2026"
 toc: true
 ---
 
-**[INSERT WORKSHOP DATE/TIME]**
+## Course info
 
-[INSERT WORKSHOP LOCATION]
+**Room:** [INSERT ROOM]
 
-# Welcome
+**Time:** [INSERT DAYS/TIME]
 
-[DESCRIPTION OF WORKSHOP]
+**Instructor:** Collin Capano
 
-## Arrival
+**Email:** cdcapano@syr.edu
 
-The event starts at XXX on the XXX and will take place at XXX.
+**Office hours:** [INSERT OFFICE HOURS AND LOCATION]
 
-## Schedule
+**[Syllabus](syllabus.qmd)**
 
-| Time            | Event                       |
-|-----------------|-----------------------------|
-| **PLACEHOLDER** | **PLACEHOLDER**             |
-| **PLACEHOLDER** | **PLACEHOLDER**             |
-| **PLACEHOLDER** | **PLACEHOLDER**             |
-| **PLACEHOLDER** | **PLACEHOLDER**             |
-| **PLACEHOLDER** | **PLACEHOLDER**             |
-| **PLACEHOLDER** | **PLACEHOLDER**             |
 
-## Instructors
+## Class Schedule
 
-## Installation
+*Note:* schedule subject to change as we progress through the semester.
+
+| Week | Dates | Topic |
+|----|--------------|----------------------|
+| 1  | [DATES] | [TOPIC] |
+| 2  | [DATES] | [TOPIC] |
+| 3  | [DATES] | [TOPIC] |
+| 4  | [DATES] | [TOPIC] |
+| 5  | [DATES] | [TOPIC] |
+| 6  | [DATES] | [TOPIC] |
+| 7  | [DATES] | [TOPIC] |
+| 8  | [DATES] | [TOPIC] |
+| 9  | [DATES] | [TOPIC] |
+| 10 | [DATES] | [TOPIC] |
+| 11 | [DATES] | [TOPIC] |
+| 12 | [DATES] | [TOPIC] |
+| 13 | [DATES] | [TOPIC] |
+| 14 | [DATES] | [TOPIC] |
+| 15 | [DATES] | [TOPIC] |
+
+
+## Important dates
+
+| Date        | |
+|-------------|---------------------------------------------------|
+| [DATE] | First day of class |
+| [DATE] | Academic/Financial drop deadline; Religious observance notification deadline |
+| [DATE] | Fall break - **No class** |
+| [DATE] | Withdrawal deadline |
+| [DATE] | Thanksgiving Break - **No class** |
+| [DATE] | Last day of class |
