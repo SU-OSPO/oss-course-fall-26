@@ -25,21 +25,21 @@ toc: true
 
 | Week | Dates | Topic |
 |----|--------------|----------------------|
-| 1  | 8/27 | Intro; project selection |
-| 2  | 9/3 | Git 1: Branches and merge conflicts |
-| 3  | 9/10 | Git 2: Collaborating on GitHub |
-| 4  | 9/17 | Writing and deploying CI tests via GitHub actions |
-| 5  | 9/24 | Creating a documentation page via GitHub pages |
-| 6  | 10/1 | Choosing an open source license |
-| 7  | 10/8 | Packaging and deployment |
-| 8  | 10/15 | Development models / writing a contributing guide |
-| 9  | 10/22 | TBA |
-| 10 | 10/29 | TBA |
-| 11 | 11/5 | TBA |
+| 1  | 8/27  | Intro; project selection |
+| 2  | 9/3   | Creating and managing environments |
+| 3  | 9/10  | Git 1: Branches and merge conflicts |
+| 4  | 9/17  | Git 2: Collaborating on GitHub |
+| 5  | 9/24  | Writing and deploying CI tests via GitHub actions |
+| 6  | 10/1  | Effective use of AI |
+| 7  | 10/8  | Creating a documentation page via GitHub pages |
+| 8  | 10/15 | Choosing an open source license |
+| 9  | 10/22 | Packaging and deployment |
+| 10 | 10/29 | Development models / writing a contributing guide |
+| 11 | 11/5  | TBA |
 | 12 | 11/12 | TBA |
 | 13 | 11/19 | TBA |
 | 14 | 11/26 | Thanksgiving - no class |
-| 15 | 12/3 | Project presentations |
+| 15 | 12/3  | Project presentations |
 | -- | 12/10 | Grad students: project papers due |
 
 
