@@ -1,6 +1,6 @@
 ---
-title: "IST 400/600: Open Source Software Development Practicum"
-subtitle: "Syracuse University, Fall 2026"
+title: "Syllabus"
+subtitle: "IST 400/600, Syracuse University, Fall 2026"
 toc: true
 ---
 
@@ -98,8 +98,8 @@ were used and describe how they were used.
 
 We will follow SciPy's AI policy:
 <https://docs.scipy.org/doc/scipy-1.18.0/dev/conduct/ai_policy.html>. As
-stated in the responsibility section of that document, *you must
-understand and be able to explain the code you submit.*
+stated in the responsibility section of that document, **you must
+understand and be able to explain the code you submit.**
 
 ## Course Requirements and Expectations
 
@@ -125,22 +125,22 @@ Points are assigned as follows:
 
 ### Undergrad students (IST 400)
 
-| *Assessment* | Points | Notes |
+| Assessment | Points | Notes |
 |--------------|--------|----------------------------|
 | Attendance   | 12     | 1 point per class. There are 14 classes in total; you can miss two without any penalty. |
 | Presentation | 12     | The last day of class you will give a ~10 minute presentation on your work for the semester. |
 | Project evaluation | 24 | How well you completed the project, with input from your faculty mentor. See below for details. |
-| *Total* | 48 |
+| **Total** | **48** |
 
 ### Grad students (IST 600)
 
-| *Assessment* | Points | Notes |
+| Assessment | Points | Notes |
 |--------------|--------|----------------------------|
 | Attendance   | 12     | 1 point per class. There are 14 classes in total; you can miss two without any penalty. |
 | Presentation | 12     | The last day of class you will give a ~10 minute presentation on your work for the semester. |
 | Project evaluation | 24 | How well you completed the project, with input from your faculty mentor. See below for details. |
 | Project paper | 12 | A [JOSS](https://joss.theoj.org/) style short paper describing the work you did over the semester. |
-| *Total* | 60 |
+| **Total** | **60** |
 
 ### Project evaluation
 
@@ -162,7 +162,8 @@ The project evaluation is a large portion of your grade. Evaluations will be bas
 ### Grading
 
 The following grading scale translates your total points earned into a letter
-grade to be submitted to the University registrar.
+grade to be submitted to the University registrar. Note that the points range
+depends on if you are an undergrad in IST 400 or a grad student in IST 600.
 
 | Total Points Earned (IST 400) | Total Points Earned (IST 600) | Registrar Grade | Grade Points |
 |:-----------------------------:|:-----------------------------:|:---------------:|:------------:|
