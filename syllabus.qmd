@@ -6,30 +6,44 @@ toc: true
 
 ## Course info
 
-**Room:** [INSERT ROOM]
+**Room:** Hinds Hall 117
 
-**Time:** [INSERT DAYS/TIME]
+**Time:** Thursdays 2:00PM -- 4:45PM
 
 **Instructor:** Collin Capano
 
 **Email:** cdcapano@syr.edu
 
-**Office hours:** [INSERT OFFICE HOURS AND LOCATION]
+**Office hours:** Wednesday 2:00PM -- 3:00PM in Hinds Hall 206A, or by
+appointment.
 
+**Course website:** <https://su-ospo.github.io/oss-course-fall-26/>
 
 ## Course Description
 
-[INSERT OFFICIAL CATALOG DESCRIPTION]
-
-### Additional Course Description
-
-[INSERT EXPANDED DESCRIPTION: what students will do in the practicum, which
-open source projects they will contribute to, and how the semester is
-structured.]
+In this course students will get practical, hands-on experience
+developing and contributing to open-source software (OSS). Students will
+be paired with university faculty to work on a semester-long, OSS
+project. Projects may involve things such as making the faculty's
+research software open source, improving the usability of their research
+software, replacing closed-source dependencies with open-source ones,
+etc. The course will simulate working as a contracted software
+developer, in which you are the developer and the faculty member is the
+client. Students will learn and apply OSS development skills, such as
+using GitHub to manage development and collaborate with others, creating
+and deploying packages, licensing, and the principles of open source. In
+the process, you will build your GitHub portfolio demonstrating your
+abilities.
 
 ### Prerequisites
 
-[INSERT PREREQUISITES]
+Proficiency in at least one programming language and/or web development
+is required. Students will be paired with projects that suit their
+strengths; e.g., those with Python experience will be assigned a Python
+project. Some basic experience with Git and GitHub are also required --
+e.g., how to create and push Git commits. More advanced GitHub topics --
+such as creating pull requests and managing branches -- will be covered
+in the course.
 
 ### Credits
 
@@ -39,103 +53,129 @@ structured.]
 
 None
 
-
 ## Learning Objectives
 
 Upon completion of this course, students will be able to:
 
-1. [INSERT OBJECTIVE]
-2. [INSERT OBJECTIVE]
-3. [INSERT OBJECTIVE]
-4. [INSERT OBJECTIVE]
-5. [INSERT OBJECTIVE]
+- Develop software in a collaborative environment.
 
+- Effectively communicate with clients and other developers while
+  building a project.
+
+- How to manage software development, including identifying and
+  achieving reasonable goals in a timely fashion.
+
+- The purpose and value of open-source principles.
+
+- How to build sustainable software packages that utilize continuous
+  integration strategies through GitHub.
+
+- How to deploy software packages for use by a wider community.
+
+- How to effectively use development tools, such as IDEs and AI coding
+  agents.
 
 ## Textbooks And Supplies
 
 ### Textbooks
 
-[INSERT READINGS. Note whether a purchase is required or whether all readings
-are freely available online.]
+There is no textbook you need to purchase for this course.
 
 ### Bring Your Own Device
 
-You are expected to bring your computer to each class session. This class is
-very hands-on, and you will be working on code in class often.
+You are expected to use your own computer for doing development work in
+this course. The software you need to install will depend on your
+assigned project.
 
-#### Software to install
+## Use of AI in this Course
 
-[INSERT REQUIRED SOFTWARE]
+Artificial Intelligence (AI), and in particular AI coding agents, are
+quickly becoming a critical part of the software developer's toolkit. As
+such, the full use of AI as a tool, with disclosure and citation, is
+permitted in this course. Students do not need to ask permission to use
+these tools, but they must explicitly and fully indicate which tools
+were used and describe how they were used.
 
-#### Accounts
-
-[INSERT REQUIRED ACCOUNTS, e.g. GitHub]
-
+We will follow SciPy's AI policy:
+<https://docs.scipy.org/doc/scipy-1.18.0/dev/conduct/ai_policy.html>. As
+stated in the responsibility section of that document, *you must
+understand and be able to explain the code you submit.*
 
 ## Course Requirements and Expectations
 
 ### Attendance and Participation
 
-In-class participation is the best way to learn and absorb the material. As
-such, you are expected to attend and participate in every class session. Your
-grade will be partially based on attendance (see below for details). If you
-must miss class, you are responsible for making up the work and catching up on
-what you missed.
+You are expected to attend the class periods and to comply with the
+university attendance policy (see the Appendix). Your grade will be
+partly based on attendance (see below for details).
 
-### Assignments
+Class periods are an opportunity to talk to other students and
+demonstrate progress on your project. You will also learn how to improve
+your OSS development skills during class time. You are expected to meet
+regularly with your faculty mentor throughout the semester; the time and
+duration of such meetings will be decided between you and your mentor.
 
-[INSERT ASSIGNMENT STRUCTURE AND GRADING CRITERIA]
+## Assessment {#grading}
 
-### Project
+There are no exams or traditional homework for this course. Evaluation is based
+on attendance, a presentation at the end of the semester, and how well you 
+carry out the project. In addition, graduate students
+in IST 600 will be required to write a short paper summarizing their work.
+Points are assigned as follows:
 
-[INSERT PROJECT DESCRIPTION AND EXPECTATIONS]
+### Undergrad students (IST 400)
+
+| *Assessment* | Points | Notes |
+|--------------|--------|----------------------------|
+| Attendance   | 12     | 1 point per class. There are 14 classes in total; you can miss two without any penalty. |
+| Presentation | 12     | The last day of class you will give a ~10 minute presentation on your work for the semester. |
+| Project evaluation | 24 | How well you completed the project, with input from your faculty mentor. See below for details. |
+| *Total* | 48 |
+
+### Grad students (IST 600)
+
+| *Assessment* | Points | Notes |
+|--------------|--------|----------------------------|
+| Attendance   | 12     | 1 point per class. There are 14 classes in total; you can miss two without any penalty. |
+| Presentation | 12     | The last day of class you will give a ~10 minute presentation on your work for the semester. |
+| Project evaluation | 24 | How well you completed the project, with input from your faculty mentor. See below for details. |
+| Project paper | 12 | A [JOSS](https://joss.theoj.org/) style short paper describing the work you did over the semester. |
+| *Total* | 60 |
+
+### Project evaluation
+
+The project evaluation is a large portion of your grade. Evaluations will be based on well you develop the project over the semester, with input from your faculty mentor. The criteria on which you will be evaluated are:
+
+- Did you meet all the milestones and goals that you and your mentor established at the start of the semester? If not, was there a reasonable reason that a milestone could not be met?
+
+- Did you meet regularly with your faculty mentor and clearly communicate with them any challenges you encountered and progress you have made?
+
+- Did you make steady progress on the project throughout the semester?
+
+- Do you have a clear record of commits and pull requests (PRs) over the course of the semester?
+
+- Is your work well documented? Could another developer pick up where you left off and continue development?
+
+- Can you explain what you've done? Do you understand the code you've contributed and its purpose?
 
 
-## Grading
-
-| Assessment | Type | Learning Outcomes | Quantity | Points Each | Points Total |
-|------------|------|-------------------|----------|-------------|--------------|
-| Attendance | Formative | | | | |
-| Assignments | Formative | | | | |
-| Project | Summative | | | | |
-| **Total** | | | | | **[TOTAL]** |
-
-### Grading Table
+### Grading
 
 The following grading scale translates your total points earned into a letter
 grade to be submitted to the University registrar.
 
-| Student Achievement | Total Points Earned	| Registrar Grade |Grade Points |
-|---------------------|---------------------|-----------------|-------------|
-| Mastery | 95 - 100 | A | 4.000 |
-| | 90 - 94 | A- | 3.666 |
-| Satisfactory | 85 - 89 | B+ | 3.333 |
-| | 80 - 84   | B | 3.000 |
-| | 75 - 79  | B- | 2.666 |
-| Low Passing  | 70 - 74 | C+ | 2.333 |
-| | 65 - 69  | C | 2.000 |
-| | 60 - 64  | C- | 1.666 |
-| Unsatisfactory | 50 - 60  | D | 1.000 |
-| | 0 - 49 | F | 0.000 |
-
-
-## Use of AI in this Course
-
-[INSERT AI POLICY. The IST 356 policy read: "Based on the assignments in this
-course and our specified learning outcomes, the full use of artificial
-intelligence as a tool, with disclosure and citation, is permitted in this
-course. Students do not need to ask permission to use these tools before
-starting an assignment or exam, but they must explicitly and fully indicate
-which tools were used and describe how they were used."]
-
-
-## Academic Integrity
-
-As a pre-eminent and inclusive student-focused research institution, Syracuse University considers academic integrity at the forefront of learning, serving as a core value and guiding pillar of education. Syracuse University’s Academic Integrity Policy provides students with the necessary guidelines to complete academic work with integrity throughout their studies. Students are required to uphold both course-specific and university-wide academic integrity expectations such as crediting your sources, doing your own work, communicating honestly, and supporting academic integrity. The full [Syracuse University Academic Integrity Policy](https://policies.syr.edu/policies/academic-rules-student-responsibilities-and-services/academic-integrity-policy/) can be viewed by visiting the [Syracuse University Policies website](https://policies.syr.edu/).
-
-Upholding Academic Integrity includes the protection of faculty’s intellectual property. Students should not upload, distribute, or share instructors’ course materials, including presentations, assignments, exams, or other evaluative materials without permission. Using websites that charge fees or require uploading of course material (e.g., Chegg, Course Hero) to obtain exam solutions or assignments completed by others, which are then presented as your own violates academic integrity expectations in this course and may be classified as a Level 3 violation. All academic integrity expectations that apply to in-person assignments, quizzes, and exams also apply online.
-
-Students found in violation of the policy are subject to grade sanctions determined by the course instructor and non-grade sanctions determined by the School or College where the course is offered. Students may not drop or withdraw from courses in which they face a suspected violation. Any established violation in this course may result in course failure regardless of violation level.
+| Total Points Earned (IST 400) | Total Points Earned (IST 600) | Registrar Grade | Grade Points |
+|:-----------------------------:|:-----------------------------:|:---------------:|:------------:|
+| 46 - 48 | 57 - 60 | A  | 4.000 |
+| 43 - 45 | 54 - 56 | A- | 3.666 |
+| 41 - 42 | 51 - 53 | B+ | 3.333 |
+| 38 - 40 | 48 - 50 | B  | 3.000 |
+| 36 - 37 | 45 - 47 | B- | 2.666 |
+| 34 - 35 | 42 - 44 | C+ | 2.333 |
+| 31 - 33 | 39 - 41 | C  | 2.000 |
+| 29 - 30 | 36 - 38 | C- | 1.666 |
+| 24 - 28 | 30 - 35 | D  | 1.000 |
+| 0 - 23  | 0 - 29  | F  | 0.000 |
 
 
 ## Class Schedule
@@ -144,30 +184,225 @@ Students found in violation of the policy are subject to grade sanctions determi
 
 | Week | Dates | Topic |
 |----|--------------|----------------------|
-| 1  | [DATES] | [TOPIC] |
-| 2  | [DATES] | [TOPIC] |
-| 3  | [DATES] | [TOPIC] |
-| 4  | [DATES] | [TOPIC] |
-| 5  | [DATES] | [TOPIC] |
-| 6  | [DATES] | [TOPIC] |
-| 7  | [DATES] | [TOPIC] |
-| 8  | [DATES] | [TOPIC] |
-| 9  | [DATES] | [TOPIC] |
-| 10 | [DATES] | [TOPIC] |
-| 11 | [DATES] | [TOPIC] |
-| 12 | [DATES] | [TOPIC] |
-| 13 | [DATES] | [TOPIC] |
-| 14 | [DATES] | [TOPIC] |
-| 15 | [DATES] | [TOPIC] |
-
+| 1  | 8/27  | Intro; project selection |
+| 2  | 9/3   | Creating and managing environments |
+| 3  | 9/10  | Git 1: Branches and merge conflicts |
+| 4  | 9/17  | Git 2: Collaborating on GitHub |
+| 5  | 9/24  | Anatomy of a software package |
+| 6  | 10/1  | Effective use of AI |
+| 7  | 10/8  | Development day |
+| 8  | 10/15 | Writing and deploying CI tests via GitHub actions |
+| 9  | 10/22 | Creating a documentation page via GitHub pages |
+| 10 | 10/29 | Choosing an open source license |
+| 11 | 11/5  | Packaging and deployment |
+| 12 | 11/12 | Development models / writing a contributing guide |
+| 13 | 11/19 | Development day |
+| 14 | 11/26 | Thanksgiving - no class |
+| 15 | 12/3  | Project presentations |
+| -- | 12/10 | Grad students: project papers due |
 
 ## Important dates
 
 | Date        | |
 |-------------|---------------------------------------------------|
-| [DATE] | First day of class |
-| [DATE] | Academic/Financial drop deadline; Religious observance notification deadline |
-| [DATE] | Fall break - **No class** |
-| [DATE] | Withdrawal deadline |
-| [DATE] | Thanksgiving Break - **No class** |
-| [DATE] | Last day of class |
+| 8/24 | First day of classes |
+| 9/14 | Academic/Financial drop deadline; Religious observance notification deadline |
+| 10/12 - 10/13 | Fall break |
+| 11/20 | Withdrawal deadline |
+| 11/22 - 11/29 | Thanksgiving Break |
+| 12/8 | Last day of classes |
+
+# Appendix
+
+## University Attendance Policy (including Absence Notification)
+
+Attendance in classes is expected in all courses at Syracuse University.
+Students are expected to arrive on campus in time to attend the first
+meeting of all classes for which they are registered. Students who do
+not attend classes starting with the first scheduled meeting may be
+academically withdrawn as they are not making progress toward degrees by
+failure to attend. Students: Information for Students: Non-attendance or
+Stopped Attending
+
+If a student is unable to participate in-person or virtually for an
+extended period of time (48 hours or more), the student may request an
+absence of notification from their home school/college Dean's Office or
+through the Student Outreach and Support office. Instructors will be
+notified via the "Absence Notification" flag in Orange SUccess.
+
+Barnes Center at the Arch (Health, Counseling, etc.) staff will not
+provide medical excuse notes for students. When Barnes Center staff
+determine it is medically necessary to remove a student from classes,
+they will coordinate with Student Outreach and Support case management
+staff to provide appropriate notification to faculty through Orange
+Success. For absences lasting less than 48 hours, students are
+encouraged to discuss academic arrangements directly with their faculty.
+
+Additional information may be found at Student Outreach and Support:
+Absence Notifications.
+
+## Academic Integrity
+
+As a pre-eminent and inclusive student-focused research institution,
+Syracuse University considers academic integrity at the forefront of
+learning, serving as a core value and guiding pillar of education.
+Syracuse University's Academic Integrity Policy provides students with
+the necessary guidelines to complete academic work with integrity
+throughout their studies. Students are required to uphold both
+course-specific and university-wide academic integrity expectations such
+as crediting your sources, doing your own work, communicating honestly,
+and supporting academic integrity. The full [Syracuse University
+Academic Integrity
+Policy](https://policies.syr.edu/policies/academic-rules-student-responsibilities-and-services/academic-integrity-policy/)
+can be viewed by visiting the [Syracuse University Policies
+website](https://policies.syr.edu/).
+
+Upholding Academic Integrity includes the protection of faculty's
+intellectual property. Students should not upload, distribute, or share
+instructors' course materials, including presentations, assignments,
+exams, or other evaluative materials without permission.
+
+Students found in violation of the policy are subject to grade sanctions
+determined by the course instructor and non-grade sanctions determined
+by the School or College where the course is offered. Students may not
+drop or withdraw from courses in which they face a suspected violation.
+Any established violation in this course may result in course failure
+regardless of violation level.
+
+## Faith Tradition Observances
+
+Syracuse University's Religious Observances Policy recognizes the
+diversity of faiths represented in the campus community and protects the
+rights of students, faculty, and staff to observe religious holy days
+according to their traditions. Under the policy, students are given an
+opportunity to make up any examination, study, or work requirements that
+may be missed due to a religious observance, provided they notify their
+instructors no later than the academic drop deadline. For observances
+occurring before the drop deadline, notification is required at least
+two academic days in advance. Students may enter their observances in
+MySlice under Student Services/Enrollment/My Religious Observances/Add a
+Notification.
+
+## Disability-Related Accommodations
+
+Syracuse University values diversity and inclusion; we are committed to
+a climate of mutual respect and full participation. There may be aspects
+of the instruction or design of this course that result in barriers to
+your inclusion and full participation in this course. I invite any
+student to contact me to discuss strategies and/or accommodations
+(academic adjustments) that may be essential to your success and to
+collaborate with the Center for Disability Resources (CDR) in this
+process.
+
+If you would like to discuss disability-accommodation or register with
+CDR, please visit Center for Disability Resources. Please call (315)
+443-4498 or email disabilityresources@syr.edu for more detailed
+information.
+
+The CDR is responsible for coordinating disability-related academic
+accommodation and will work with the students to develop an access plan.
+Since academic accommodation may require early planning and generally is
+not provided retroactively, please contact CDR as soon as possible to
+begin this process.
+
+## Discrimination or Harassment
+
+The University does not discriminate and prohibits harassment or
+discrimination related to any protected category including creed,
+ethnicity, citizenship, sexual orientation, national origin, sex,
+gender, pregnancy, reproductive health decisions, disability, marital
+status, political or social affiliation, age, race, color, veteran
+status, military status, religion, sexual orientation, domestic violence
+status, genetic information, gender identity, gender expression or
+perceived gender.
+
+Any complaint of discrimination or harassment related to any of these
+protected bases should be reported to Sheila Johnson-Willis, the
+University's Chief Equal Opportunity & Title IX Officer for Faculty and
+Staff. She is responsible for coordinating compliance efforts under the
+various laws including Titles VI, VII, IX, and Section 504 of the
+Rehabilitation Act. She can be contacted at Equal Opportunity,
+Inclusion, and Resolution Services, 621 Skytop Road, Suite 1001,
+Syracuse University, Syracuse, NY 13244-1120; or by email:
+equalopp@syr.edu; or by telephone: 315-443-4018.
+
+## TITLE IX
+
+Federal and state law, and University policy prohibit discrimination and
+harassment based on sex or gender (including sexual harassment, sexual
+assault, domestic/dating violence, stalking, and sexual exploitation).
+If a student has been impacted by any prohibited behavior based on sex
+or gender, they can obtain confidential counseling support, 24-hours a
+day, 7 days a week, from the Sexual and Relationship Violence Response
+Team at the Counseling Center (315-443-8000, Barnes Center at The Arch,
+150 Sims Drive, Syracuse, New York 13244). Incidents of sexual or
+relationship violence or harassment can be reported to the University's
+Title IX Coordinators (Sheila Johnson Willis, Chief Equal Opportunity
+Officer and Title IX Officer for Faculty and Staff, 315-443-4018,
+equalopp@syr.edu or Pamela Peter, Director/Coordinator of Student Title
+IX Case Management, 315-443-0211, titleix@syr.edu). Reports to law
+enforcement can be made to the University's Department of Public Safety
+(315-443-2224, 005 Sims Hall), the Syracuse Police Department (511 South
+State Street, Syracuse, New York, 911 in case of emergency or
+315-435-3016 to speak with the Abused Persons Unit), or the State Police
+(Campus Sexual Assault Victims Unit, 844-845-7269). I will seek to keep
+information you share with me private to the greatest extent possible,
+but as a professor I have mandatory reporting responsibilities to share
+information regarding sexual misconduct, relationship violence,
+stalking, harassment, and crimes I learn about with the University's
+Title IX Officer to help make our campus a safer place for all and to
+ensure you have access to available resources.
+
+## Health and Wellness Considerations
+
+Well-being and mental health are significant predictors of academic
+success. It is critical to take care of yourself physically and
+emotionally and to effectively navigate stress, anxiety, and depression.
+Please familiarize yourself with the range of resources the Barnes
+Center provides (https://ese.syr.edu/bewell/) and seek out support for
+mental health concerns as needed. Counseling services are available
+24/7, 365 days, at 315-443-8000.
+
+## Course Evaluations
+
+At the end of the term, the iSchool will ask you to share course
+feedback through EvaluationKIT \[https://coursefeedback.syr.edu\]. Log
+in to EvaluationKIT using your NetID and password. Please take the time
+to share your feedback about this course and your experience in it; all
+ratings and comments are completely anonymous. The iSchool carefully
+reviews your feedback. Our instructors use this feedback to fine tune
+course delivery and instruction; our professors of record use this
+feedback to fine tune course content and assignments. All feedback is
+factored into iSchool decisions about course, program, and instructor
+development.
+
+## Orange Alert
+
+ORANGE ALERT, Syracuse University's crisis notification system, uses
+text messages, phones, and email alerts to provide rapid notification
+and instructions to members of the University community in the event of
+a crisis in progress. Crises could include an individual who is
+considered armed and dangerous, a hazardous materials incident, an
+explosion, or any other event in which there is an immediate threat of
+physical harm or death to campus community members. We recognize that
+faculty may consider activated cell phones as an interruption to their
+class. However, the Department of Public Safety recommends that faculty
+members leave their own cell phones on vibrate to receive text messages
+about a potential emergency situation. It is also recommended that
+faculty designate several class members to leave their cell phones on
+vibrate to receive notifications in the event of a critical incident.
+ORANGE ALERT contact information for students, faculty, and staff is
+drawn from the MySlice online information system; please keep your
+contact information current.
+
+In the event of an emergency, please use one of the following numbers to
+reach us:
+
+- From any phone: 315.443.2224
+
+- From your cell phone: #78 (#SU)
+
+- Campus landline: 711
+
+For more information on ORANGE ALERT, including how to update your
+contact information, visit the DPS website.
