@@ -18,16 +18,8 @@ We recommend one of two ways:
    the "Git Clone" command in the command pallette. The first time you do this, you'll be prompted to log
    into GitHub. From then on, you'll be able to clone repositories to folders you select through VS Code.
    No other setup is needed. Instructions are provided below on how to clone the repository in this way.
-To clone the repo using VS Code:
 
-
-
-::: {.callout-important}
-## ssh key setup
-In order to do this exercise you will need an `ssh` key uploaded to GitHub. If you have not done that yet, follow the [ssh setup instructions](ssh_setup.qmd) before starting this exercise.
-:::
-
-## 1. Create a repository on GitHub
+## I. Create a repository on GitHub
 
 1. Go to https://github.com and sign in if you are not already. Then go to https://github.com/new to create a new repository.
 
@@ -45,7 +37,7 @@ In order to do this exercise you will need an `ssh` key uploaded to GitHub. If y
 
 8. Now click the "Create repository" green button. This will create your repository. You will have the repository webpage open.
 
-## 2. Clone the repository to your local computer
+## II. Clone the repository to your local computer
 
 We want to add things to your repository. You can do that through the web
 interface, but it's easier to do it on your local computer, esepcially for code development so that you
@@ -90,7 +82,7 @@ e.  You will be prompted where to store the repository. Select the folder that y
 f.  You will be asked whether to open or open in a new window. To make sure we're not mixing up projects, select "Open in a New Window". This will open a new VS Code Window with the contents on the cloned repository.
 
 
-## 3. Add files to the repository
+## III. Add files to the repository
 
 1. When git clone finishes, you will have a new directory that has the same name as your repo on your computer. `cd` into that and type `ls`. You should see the `README.md` file and the `LICENSE` file.
 
