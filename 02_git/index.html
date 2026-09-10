@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1. Project management – IST 400/600 Fall 2026</title>
+<title>2. git and GitHub – IST 400/600 Fall 2026</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -35,7 +70,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../01_project_management/conda_install.html" rel="next">
+<link href="../02_git/cli/exercise1.html" rel="next">
+<link href="../01_project_management/conda.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -75,13 +111,13 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="1. Project management – IST 400/600 Fall 2026">
+<meta property="og:title" content="2. git and GitHub – IST 400/600 Fall 2026">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://su-ospo.github.io/oss-course-fall-26/images/ischool_logo_reverseX2.png">
 <meta property="og:site_name" content="IST 400/600 Fall 2026">
 <meta property="og:image:height" content="105">
 <meta property="og:image:width" content="650">
-<meta name="twitter:title" content="1. Project management – IST 400/600 Fall 2026">
+<meta name="twitter:title" content="2. git and GitHub – IST 400/600 Fall 2026">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://su-ospo.github.io/oss-course-fall-26/images/ischool_logo_reverseX2.png">
 <meta name="twitter:image-height" content="105">
@@ -116,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01_project_management/index.html">1. Project management</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_git/index.html">2. <code>git</code> and GitHub</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -130,13 +166,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../01_project_management/index.html" class="sidebar-item-text sidebar-link active">
+            <a href="../01_project_management/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1. Project management</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01_project_management/conda_install.html" class="sidebar-item-text sidebar-link">
@@ -153,13 +189,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../02_git/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../02_git/index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">2. <code>git</code> and GitHub</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
@@ -242,12 +278,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lecture---9226" id="toc-lecture---9226" class="nav-link active" data-scroll-target="#lecture---9226">Lecture - 9/2/26</a>
+  <li><a href="#command-line" id="toc-command-line" class="nav-link active" data-scroll-target="#command-line">Command Line</a>
   <ul class="collapse">
-  <li><a href="#recording" id="toc-recording" class="nav-link" data-scroll-target="#recording">Recording</a></li>
-  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  <li><a href="#tutorials" id="toc-tutorials" class="nav-link" data-scroll-target="#tutorials">Tutorials</a></li>
   </ul></li>
-  <li><a href="#conda-info" id="toc-conda-info" class="nav-link" data-scroll-target="#conda-info">Conda info</a></li>
+  <li><a href="#github-desktop" id="toc-github-desktop" class="nav-link" data-scroll-target="#github-desktop">GitHub Desktop</a>
+  <ul class="collapse">
+  <li><a href="#prerequisites-1" id="toc-prerequisites-1" class="nav-link" data-scroll-target="#prerequisites-1">Prerequisites</a></li>
+  <li><a href="#tutorials-1" id="toc-tutorials-1" class="nav-link" data-scroll-target="#tutorials-1">Tutorials</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -256,7 +296,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">1. Project management</h1>
+<h1 class="title">2. <code>git</code> and GitHub</h1>
 </div>
 
 
@@ -273,34 +313,109 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="lecture---9226" class="level2">
-<h2 class="anchored" data-anchor-id="lecture---9226">Lecture - 9/2/26</h2>
-<p>In the first part I review what you should discuss and establish with your mentor the first time you meet with them. I then do a brief review of package and environment managers.</p>
-<section id="recording" class="level3">
-<h3 class="anchored" data-anchor-id="recording">Recording</h3>
-<iframe id="kmsembed-1_32ad4iiy" width="640" height="360" src="https://video.syr.edu/embed/secure/iframe/entryId/1_32ad4iiy/uiConfId/45992161/st/0" class="kmsembed" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" referrerpolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="IST 400/600 Lecture 9-2-26">
-</iframe>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 84%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Objectives</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><ul>
+<li>Learn how branches work in git.</li>
+<li>Understand the differences between <code>git</code> and GitHub.</li>
+<li>Use GitHub to collaborate with others on a project.</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<p>This unit covers more branching in git and how to collaborate on GitHub. As some of you are more comfortable with the command line and some prefer the GUI, I’ve provided two copies of the tutorials: one that uses GitHub Desktop (GUI) and one that uses the command line interface. Both tutorials cover the same material; feel free to choose the one you’re most comfortable with.</p>
+<section id="command-line" class="level2">
+<h2 class="anchored" data-anchor-id="command-line">Command Line</h2>
+<section id="prerequisites" class="level3">
+<h3 class="anchored" data-anchor-id="prerequisites">Prerequisites</h3>
+<p>If you’ve never used git on the command line, you’ll first need to set up some global configurations. Namely, you’ll need to tell <code>git</code> what your name and email are. To do that, open a terminal and run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"YOUR NAME"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"YOUR_EMAIL_ADDRESS"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For entering longer commit messages (you’ll learn what this means in Exercise 1) we’ll need to tell <code>git</code> what text editor to use. By default <code>git</code> will use <code>vim</code>, which can be tricky to understand for new users. For the purposes of this tutorial, we’ll use the more user-friendly <a href="https://en.wikipedia.org/wiki/GNU_nano">nano</a>. To do that, run the following in your terminal:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> core.editor nano</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you wish to reset to the default editor after the tutorial is over, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> <span class="at">--unset-all</span> core.editor</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
 </section>
-<section id="slides" class="level3">
-<h3 class="anchored" data-anchor-id="slides">Slides</h3>
-<p><a href="project_management.pdf">download PDF</a></p>
-<object data="project_management.pdf" type="application/pdf" width="100%" height="600" style="border: 1px solid #ccc;">
-Your browser cannot display PDFs inline. <a href="project_management.pdf">Download the slides</a> instead.
-</object>
-</section>
-</section>
-<section id="conda-info" class="level2">
-<h2 class="anchored" data-anchor-id="conda-info">Conda info</h2>
-<p>As stated in the lecture, here are the instructions for installing Miniconda:</p>
+<section id="tutorials" class="level3">
+<h3 class="anchored" data-anchor-id="tutorials">Tutorials</h3>
 <ul>
-<li><a href="../01_project_management/conda_install.html">Install Miniconda</a></li>
+<li><a href="../02_git/cli/exercise1.html">Part 1</a>: Practice with <code>git</code> on a local repository</li>
+<li><a href="../02_git/cli/exercise2.html">Part 2</a>: Interacting with remote repositories on GitHub</li>
+<li><a href="../02_git/cli/exercise3.html">Part 3</a>: Collaborating in GitHub using the Fork and Pull Model</li>
 </ul>
-<p>Here is a tutorial that goes into more details about what an environment is, and how to use conda on the command line:</p>
+</section>
+</section>
+<section id="github-desktop" class="level2">
+<h2 class="anchored" data-anchor-id="github-desktop">GitHub Desktop</h2>
+<section id="prerequisites-1" class="level3">
+<h3 class="anchored" data-anchor-id="prerequisites-1">Prerequisites</h3>
+<p>In order to do the GUI version, you first need to install GitHub Desktop if you don’t have it already.</p>
+<section id="install-github-desktop" class="level4">
+<h4 class="anchored" data-anchor-id="install-github-desktop">1. Install GitHub Desktop</h4>
+<p>For this tutorial we will be using GitHub Desktop. To install:</p>
+<ol type="1">
+<li>Go to https://github.com/apps/desktop.</li>
+<li>Click the “Download now” button.</li>
+<li>What you do next depends on your operating system:</li>
+</ol>
 <ul>
-<li><a href="../01_project_management/conda.html">Bash variables, environments, and <code>conda</code></a></li>
+<li>If you’re on a Mac:
+<ol type="a">
+<li>Click “Download for Apple silicon” or “Download for Intel chip” depending on your processor. If you’re not sure what processor you have, click the apple button in your Menu bar then “About This Mac”. Look at the “Chip” entry in the window that pops up. If it says, “Apple M…” you have Apple silicon. If it says, “Intel …” you have an Intel chip.</li>
+<li>Clicking one of the download buttons will download a .zip file that starts with “GitHubDesktop”. Once it’s finished downloading, open it. The file will unzip and open a Finder window.</li>
+<li>Move the GitHub Desktop icon into your Applications folder in Finder.</li>
+<li>Open GitHub Desktop as you would any other application (e.g., by going to Launchpad and clicking on the GitHub Desktop icon).</li>
+<li>The first time you open GitHub Desktop you will be prompted with a warning, “‘GitHub Desktop’ is an app downloaded from the internet. Are you sure you want to open it?” Click “Open”.</li>
+</ol></li>
+<li>If you’re on a Windows machine:
+<ol type="a">
+<li>Click “Download for Windows (64 bit)”. This will download a file called “GitHubDesktopSetup-x64.exe”.</li>
+<li>Once the file downloads, it will automatically install and open GitHub Desktop.</li>
+</ol></li>
+</ul>
+</section>
+<section id="setup-github-desktop" class="level4">
+<h4 class="anchored" data-anchor-id="setup-github-desktop">2. Setup GitHub Desktop</h4>
+<p>The first time you open GitHub Desktop you will need to sign into GitHub.</p>
+<ol type="1">
+<li>Click “Sign in to GitHub.com”. If you do not have an account yet, click “Create your free account”.</li>
+<li>Follow the on-screen instructions to sign in.</li>
+<li>After you sign in, GitHub Desktop will ask you to “Configure Git”. We recommend you select the option “Use my GitHub account name and email address”. Click “Finish”.</li>
+</ol>
+<p>You will next be prompted with a “Let’s get started!” screen that will ask you to add a repository to GitHub Desktop. <strong>Stop here</strong> and go to <a href="../02_git/desktop/exercise1.html">Part 1</a>.</p>
+</section>
+</section>
+<section id="tutorials-1" class="level3">
+<h3 class="anchored" data-anchor-id="tutorials-1">Tutorials</h3>
+<ul>
+<li><a href="../02_git/desktop/exercise1.html">Part 1</a>: Practice with GitHub Desktop on a local repository</li>
+<li><a href="../02_git/desktop/exercise2.html">Part 2</a>: Interacting with remote repositories on GitHub</li>
+<li><a href="../02_git/desktop/exercise3.html">Part 3</a>: Collaborating in GitHub using the Fork and Pull Model</li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -706,10 +821,13 @@ Your browser cannot display PDFs inline. <a href="project_management.pdf">Downlo
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../01_project_management/conda.html" class="pagination-link" aria-label="Bash variables, environments, and `conda`">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Bash variables, environments, and <code>conda</code></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../01_project_management/conda_install.html" class="pagination-link" aria-label="Installing conda">
-        <span class="nav-page-text">Installing conda</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../02_git/cli/exercise1.html" class="pagination-link" aria-label="1. Practice with `git` on a local repository">
+        <span class="nav-page-text">1. Practice with <code>git</code> on a local repository</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
