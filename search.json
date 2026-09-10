@@ -209,6 +209,234 @@
     ]
   },
   {
+    "objectID": "01_project_management/conda.html",
+    "href": "01_project_management/conda.html",
+    "title": "Bash variables, environments, and conda",
+    "section": "",
+    "text": "Note\n\n\n\nThe first part of this tutorial uses bash, which is a shell program in UNIX systems, such as MacOS or Linux. Windows users, you can install WSL, or git-scm if you would like to use bash.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#the-export-command",
+    "href": "01_project_management/conda.html#the-export-command",
+    "title": "Bash variables, environments, and conda",
+    "section": "The export Command",
+    "text": "The export Command\nIn Bash, variables normally exist only in the shell where they were defined.\nThe export command marks a variable so that it is passed to child processes (programs or scripts started from the current shell).\n\nExample:\nMYVAR=\"Hello\"\nbash -c 'echo $MYVAR'\n# (No output — MYVAR was not exported)\n\nexport MYVAR=\"Hello\"\nbash -c 'echo $MYVAR'\n# Output: Hello\nIn the first case, the new Bash process doesn’t know about MYVAR.\nIn the second case, export makes it available to the child process.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#the-source-command",
+    "href": "01_project_management/conda.html#the-source-command",
+    "title": "Bash variables, environments, and conda",
+    "section": "The source Command",
+    "text": "The source Command\nWhen you run a Bash script normally, it executes in a subshell (a separate process).\nAny variables set inside that script will only exist in that subshell and disappear when the script finishes.\nThe source command runs a script in the current shell.\nThis means variables or changes made by the script persist after it finishes.\n\nExample: Difference between source and export\ntest.sh:\nMYVAR=\"Hello\"\nCase 1 — Running normally:\nbash test.sh\necho $MYVAR\n# (No output — MYVAR is not set in current shell)\nCase 2 — Using source:\nsource test.sh\necho $MYVAR\n# Output: Hello\nCase 3 — Using export in a script:\n# test_export.sh\nexport MYVAR=\"Hello\"\nbash test_export.sh\necho $MYVAR\n# (No output — export makes it available to child processes, not the parent shell)",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#how-environments-work",
+    "href": "01_project_management/conda.html#how-environments-work",
+    "title": "Bash variables, environments, and conda",
+    "section": "How environments work",
+    "text": "How environments work\n\nEach shell session has its own environment.\nWhen you start a new process (run a command or script), it inherits a copy of your current environment.\nVariables you define with export become part of the environment and are visible to child processes.\nVariables defined without export are shell variables — they exist only in the current shell and are not passed to child processes.\n\nYou can view all your current environment variables by running:\nenv",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#the-path-variable",
+    "href": "01_project_management/conda.html#the-path-variable",
+    "title": "Bash variables, environments, and conda",
+    "section": "The PATH Variable",
+    "text": "The PATH Variable\nThe PATH variable controls where Bash searches for executables. It points to a : separated list of absolute paths. See what yours is set to by running:\necho $PATH\nWhen you execute any program in the shell, bash cycles through the list of paths specified in PATH until it finds an executable file that matches the name.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#create-environment",
+    "href": "01_project_management/conda.html#create-environment",
+    "title": "Bash variables, environments, and conda",
+    "section": "Create Environment",
+    "text": "Create Environment\nconda create --name py311 python=3.11\nThis creates a new environment called py311 with Python version 3.11 installed.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#activatedeactivate-environments",
+    "href": "01_project_management/conda.html#activatedeactivate-environments",
+    "title": "Bash variables, environments, and conda",
+    "section": "Activate/Deactivate Environments",
+    "text": "Activate/Deactivate Environments\nconda activate py311\nActivating an environment changes your shell’s environment variables (especially PATH) so that commands use the software installed in that environment. You’ll see the environment name in parentheses at the start of your shell prompt.\nconda deactivate\nDeactivating an environment restores your shell to its previous state, removing the environment-specific entries from PATH and other variables.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#install-packages",
+    "href": "01_project_management/conda.html#install-packages",
+    "title": "Bash variables, environments, and conda",
+    "section": "Install Packages",
+    "text": "Install Packages\nconda install numpy\nInstalls the package numpy into the currently active environment.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#channels",
+    "href": "01_project_management/conda.html#channels",
+    "title": "Bash variables, environments, and conda",
+    "section": "Channels",
+    "text": "Channels\nA channel is a location (usually online) where Conda looks for packages. When you install or search for a package, Conda queries one or more channels.\n\nDefault channel: If you installed Conda via Miniforge, the default channel is conda-forge, a large community-maintained repository.\nSpecialized channels: Some fields use dedicated channels, such as bioconda for bioinformatics software.\n\nTo install from a specific channel:\nconda install -c bioconda package_name\nHere, -c bioconda tells Conda to search the bioconda channel for the package.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#challenge-questions",
+    "href": "01_project_management/conda.html#challenge-questions",
+    "title": "Bash variables, environments, and conda",
+    "section": "Challenge questions",
+    "text": "Challenge questions\n\nCreate a conda environment called conda-test.\n\n\n\n\n\n\nCautionSolution\n\n\n\n\n\nconda create -n conda-test\n\n\n\nActivate your conda-test environment and install numpy into it.\n\n\n\n\n\n\nCautionSolution\n\n\n\n\n\nconda activate conda-test\nconda install numpy\n\n\n\nPrint your $PATH; you should see that the first couple of paths point to a conda directory with the name of your environment (conda-test) in it.\n\n\n\n\n\n\nCautionSolution\n\n\n\n\n\necho $PATH\n\n\n\nCreate a python script called check_versions.py that contains the following code:\n#!/usr/bin/env python\nimport platform\nimport numpy\nprint(\"Python version: \", platform.python_version())\nnpvers = numpy.__version__\nprint(\"Numpy version: \", npvers)\nChange the permissions on check_versions.py to make it executable.\n\n\n\n\n\n\nCautionSolution\n\n\n\n\n\n\nRun:\nnano check_versions.py\nType/paste in the code. Then type Ctrl+O to save, then Ctrl+X to exit.\nRun:\nchmod +x check_versions.py\n\n\n\n\nSee what version of Python and numpy you installed by running check_versions.py script:\n./check_versions.py\nThis will print out the current time followed by the versions of Python and numpy you are using.\nSuppose that you need to use an older version of Python and numpy for a project. Create another conda environment called conda-test2 and install Python version 3.9 and numpy 1.24.1 into it.\n\n\n\n\n\n\nCautionSolution\n\n\n\n\n\nconda create -n conda-test2 python=3.9 numpy=1.24.1\n\n\n\nActivate conda-test2 and run check versions to verify that you have the desired versions.\n\n\n\n\n\n\nCautionSolution\n\n\n\n\n\nconda activate conda-test2\n./check_versions.py\n\n\n\nCreate an environment called biotest and install gofasta in it using the bioconda channel. (You can specify the channel for conda create and/or conda install using the -c flag, just as we did the in search command above.)\n\n\n\n\n\n\nCautionSolution\n\n\n\n\n\nconda create -n biotest -c bioconda gofasta\n\n\n\nNow activate the bioconda channel and test that gofasta is installed by running:\nconda activate biotest\ngofasta --help\nYou should get a help message giving information about gofasta.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#removing-environments",
+    "href": "01_project_management/conda.html#removing-environments",
+    "title": "Bash variables, environments, and conda",
+    "section": "Removing environments",
+    "text": "Removing environments\nLets remove some of the environments we created to save space. You can see all the environments you have installed by running:\nconda info --envs\nLet’s uninstall the conda-test environment. First, if you are not in the base environment, go to it by running conda deactivate. This will take you to your last active environment. Keep deactivating until you see (base) on the left of the prompt. Alternatively, just type conda activate (with no environment name) to go directly to the base environment. Now let’s remove the conda-test environment by running:\nconda remove --all -n conda-test\nNow run conda info --envs again to check that the environment is installed. Repeat for any other environments you’d like to remove.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#bash-customization",
+    "href": "01_project_management/conda.html#bash-customization",
+    "title": "Bash variables, environments, and conda",
+    "section": "Bash Customization",
+    "text": "Bash Customization\nCustomizing your Bash shell can improve your workflow and make frequently used commands easier to run.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#example-enabling-color-output-in-ls",
+    "href": "01_project_management/conda.html#example-enabling-color-output-in-ls",
+    "title": "Bash variables, environments, and conda",
+    "section": "Example: Enabling Color Output in ls",
+    "text": "Example: Enabling Color Output in ls\nOn many systems, the output of ls returns text that is the same color, regardless of if it’s a file, folder, or something else. However, if you run:\nls -G\nThen the output text will be colored depending on what item is; e.g., directory names will be in blue and files in white.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#aliases",
+    "href": "01_project_management/conda.html#aliases",
+    "title": "Bash variables, environments, and conda",
+    "section": "Aliases",
+    "text": "Aliases\nAliases map a short command to a longer one. For example, if we always want the output of ls to be colored, we can alias ls -G with ls with:\nalias ls=\"ls -hG\"",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#customization-with-.bash_profile-and-.bashrc",
+    "href": "01_project_management/conda.html#customization-with-.bash_profile-and-.bashrc",
+    "title": "Bash variables, environments, and conda",
+    "section": "Customization with .bash_profile and .bashrc",
+    "text": "Customization with .bash_profile and .bashrc\nYou may find an alias like the above so useful that you want it to run everytime you open a terminal. There are files that are run automatically when Bash starts that allow you to do just that. They are:\n\n~/.bash_profile\nRuns for login shells. Good for commands that should only run once when you log in (e.g., setting environment variables).\n~/.bashrc\nRuns for interactive non-login shells. Good for commands you want every interactive shell to run (e.g., aliases, functions).\n\nOn many systems, .bash_profile will call .bashrc so settings apply in both contexts.\n\nTip: If unsure where to put something, put it in .bashrc and make sure .bash_profile sources .bashrc.\n\n\n\n\n\n\n\nNoteUsing Zsh?\n\n\n\nIf your default shell is zsh (common on macOS Catalina and later), the equivalent files are: - ~/.zprofile – similar to .bash_profile - ~/.zshrc – similar to .bashrc\nConfiguration changes should go into ~/.zshrc for most use cases.\n\n\nYou can put any bash command you like in these scripts to further customize your shell. For example, you can configure your shell so that pressing the up arrow searches backward through your command history for commands starting with the text you have typed, and the down arrow searches forward with:\n\nfor bash (add this to your ~/.bashrc):\nbind '\"\\e[A\": history-search-backward'\nbind '\"\\e[B\": history-search-forward'\nfor Zsh (add this to your ~/.zshrc):\nbindkey \"^[[A\" history-search-backward\nbindkey \"^[[B\" history-search-forward",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#redirection-and-append",
+    "href": "01_project_management/conda.html#redirection-and-append",
+    "title": "Bash variables, environments, and conda",
+    "section": "Redirection and Append",
+    "text": "Redirection and Append\nRedirect output to a file:\necho \"Hello\" &gt; file.txt\nOverwrites file.txt with “Hello”.\nAppend output to a file:\necho \"World\" &gt;&gt; file.txt\nAdds “World” to the end of file.txt.\n\n\n\n\n\n\nCautionChallenge:\n\n\n\nCreate a file called input.txt that contains the text “To be, or not to be,” on the first line. Then add “that is the question.” on the second line.\n\n\n\n\n\n\nCautionSolution\n\n\n\n\n\necho \"To be, or not to be,\" &gt; input.txt\necho \"that is the question.\" &gt;&gt; input.txt",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#text-manipulation-with-sed",
+    "href": "01_project_management/conda.html#text-manipulation-with-sed",
+    "title": "Bash variables, environments, and conda",
+    "section": "Text Manipulation with sed",
+    "text": "Text Manipulation with sed\nIt frequently happens that you need to search for and replace text in a file. The program sed is used for that. For example, let’s modify the text in the input.txt you created above, and replace the word “be” with “use AI”:\nsed 's/ be/ use AI/g' input.txt\nWe can write results to a new file:\nsed 's/ be/ use AI/g' input.txt &gt; output.txt",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#file-permissions-and-ownership",
+    "href": "01_project_management/conda.html#file-permissions-and-ownership",
+    "title": "Bash variables, environments, and conda",
+    "section": "File Permissions and Ownership",
+    "text": "File Permissions and Ownership\n\nViewing Permissions\nls -l\nExample output:\n-rw-r--r--  1 user  staff   1234 Aug 14 12:00 file.txt\n\nFirst character: file type (- = file, d = directory)\nNext three: owner permissions\nNext three: group permissions\nNext three: others’ permissions\n\n\n\nChanging Permissions\nchmod u+x script.sh   # add execute permission for owner\nchmod u-w file.txt    # remove write permission for owner\n\n\nChanging Ownership\nsudo chown newuser file.txt",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda.html#conditionals",
+    "href": "01_project_management/conda.html#conditionals",
+    "title": "Bash variables, environments, and conda",
+    "section": "Conditionals",
+    "text": "Conditionals\nIn Bash, as with any language, conditionals allow you to execute commands only if certain conditions are true. They help control the flow of your script, enabling decisions based on system state, user input, or computation results.\nThe basic syntax for an if statement in Bash is:\nif [ CONDITION ]; then\n  # commands to run if CONDITION is true\nelif [ OTHER_CONDITION ]; then\n  # commands to run if OTHER_CONDITION is true\nelse\n  # commands to run if no conditions are true\nfi\n\nKey points:\n\nThe square brackets [ ] are a synonym for the test command.\nYou must have spaces after [ and before ].\nCommon tests:\n\n-f file — file exists and is a regular file\n-d directory — directory exists\nstring1 = string2 — strings are equal\nn1 -eq n2 — numbers are equal\n! CONDITION — logical NOT (true if CONDITION is false)\n\n\nFor example, to check if a file exists:\nif [ -f \"file.txt\" ]; then\n  echo \"File exists\"\nelse\n  echo \"File does not exist\"\nfi",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Bash variables, environments, and `conda`"
+    ]
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "IST 400/600: Open Source Software Development Practicum",
@@ -235,5 +463,74 @@
     "title": "IST 400/600: Open Source Software Development Practicum",
     "section": "Important dates",
     "text": "Important dates\n\n\n\n\n\n\n\nDate\n\n\n\n\n\n8/24\nFirst day of classes\n\n\n9/14\nAcademic/Financial drop deadline; Religious observance notification deadline\n\n\n10/12 - 10/13\nFall break\n\n\n11/20\nWithdrawal deadline\n\n\n11/22 - 11/29\nThanksgiving Break\n\n\n12/8\nLast day of classes"
+  },
+  {
+    "objectID": "01_project_management/index.html",
+    "href": "01_project_management/index.html",
+    "title": "1. Project management",
+    "section": "",
+    "text": "In the first part I review what you should discuss and establish with your mentor the first time you meet with them. I then do a brief review of package and environment managers.\n\n\n\n\n\n\n\ndownload PDF\n\nYour browser cannot display PDFs inline. Download the slides instead.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management"
+    ]
+  },
+  {
+    "objectID": "01_project_management/index.html#lecture---9226",
+    "href": "01_project_management/index.html#lecture---9226",
+    "title": "1. Project management",
+    "section": "",
+    "text": "In the first part I review what you should discuss and establish with your mentor the first time you meet with them. I then do a brief review of package and environment managers.\n\n\n\n\n\n\n\ndownload PDF\n\nYour browser cannot display PDFs inline. Download the slides instead.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management"
+    ]
+  },
+  {
+    "objectID": "01_project_management/index.html#conda-info",
+    "href": "01_project_management/index.html#conda-info",
+    "title": "1. Project management",
+    "section": "Conda info",
+    "text": "Conda info\nAs stated in the lecture, here are the instructions for installing Miniconda:\n\nInstall Miniconda\n\nHere is a tutorial that goes into more details about what an environment is, and how to use conda on the command line:\n\nBash variables, environments, and conda",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda_install.html",
+    "href": "01_project_management/conda_install.html",
+    "title": "Installing conda",
+    "section": "",
+    "text": "There are different flavors of conda: Anaconda (which is not open source), Miniconda, and Miniforge. I do not recommend using Anaconda unless you absolutely need some of the additional packages it comes with. Aside from being a large install, it is not technically open source, which can lead to some unexpected licensing issues.\nHere I provide instructions for installing Miniconda",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Installing conda"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda_install.html#step-1-install-miniconda",
+    "href": "01_project_management/conda_install.html#step-1-install-miniconda",
+    "title": "Installing conda",
+    "section": "Step 1: Install Miniconda",
+    "text": "Step 1: Install Miniconda\n\nMac/Linux/Windows Subsystem for Linux (WSL)\n\nOpen a terminal in VS Code by clicking “Terminal” -&gt; “New Terminal”.\nIn the terminal window, type:\ncd\nThen hit ENTER.\nFollow the instructions Quickstart install instructions on the Miniconda website. For WSL, select “Linux”.\n\n\n\nWindows\n\nDownload the Miniconda installer for Windows. Click the Downlad button under “Miniconda Installers”, not the one under “Distribution Installers”.\nRun the installer by double-clicking on the downloaded file and follow the steps below.\n\nClick “Run”.\nClick on “Next”.\nClick on “I agree”.\nSelect “Just me” and click on “Next”.\nClick “Next” to install to the default destination folder.\n\n\n\n\n\n\nWarning\n\n\n\nIf you had tried to install miniconda previously, you may get an error that says “Directory … is not empty, please choose a different location.” Do not choose a different location. Instead, click “OK”, then rename the previous miniconda3 directory. You can do that by going to VS Code, opening a new terminal window (click “Terminal” -&gt; “New Terminal”), and entering the following (hit ENTER after each line):\ncd\nmv miniconda3 miniconda3-old\nThen go back to the Miniconda installer and click “Next”.\n\n\nCheck the option for “Add Anaconda to my PATH environment variable” and check the option for “Register Anaconda as my default Python 3.x”.\n\nNote that even though the installation is for Miniconda, the installer uses the word Anaconda in these options.\nYou will also see a message in red text that selecting “Add Anaconda to my PATH environment variable” is not recommended; continue with this selection to make using conda easier in Git Bash. If you have questions or concerns, please contact your instructor.\n\nClick on “Install”.\nWhen the install is complete, Click on “Next”.\nClick on “Finish”.\n\nOpen a new terminal window in VS Code by clicking “Terminal” -&gt; “New Terminal”.\nType the following command to initialize conda:\nconda init bash\nOpen a new terminal window in VS Code by either hitting the “+” key next to “bash” in the upper left of the terminal window, or by cliking “Terminal” -&gt; “New Terminal”. If conda installed successfullly, you should see (base) appear next to or above your command prompt.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Installing conda"
+    ]
+  },
+  {
+    "objectID": "01_project_management/conda_install.html#step-2-create-a-conda-environment-and-test-it-in-vs-code",
+    "href": "01_project_management/conda_install.html#step-2-create-a-conda-environment-and-test-it-in-vs-code",
+    "title": "Installing conda",
+    "section": "Step 2: Create a conda environment and test it in VS Code",
+    "text": "Step 2: Create a conda environment and test it in VS Code\n\nIn the bash terminal window in VS Code (make sure it says (base) to the left of or above the prompt), type:\nconda create -n ist356 -c conda-forge -y python=3.11 ipykernel\nThen hit ENTER.\n\n\n\n\n\n\nWarning\n\n\n\nThe first time you run conda, you may get an error about Terms of Service not being accepted for certain channels. Accept the TOS for those channels by running the commands listed. For example, if one of the channels is https://repo.anaconda.com/pkgs/main, copy and paste the command into the terminal:\nconda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main\nFollowed by hitting ENTER (to execute a command in the terminal, you hit ENTER after typing/pasting it in). You’ll need to do this for each of the channels listed.\nOnce you have accepted the TOS for all the channels, run the conda create command above again.\n\n\nCheck to ensure your environment works:\n\nClick File -&gt; “New File…”\nIn the drop down menu, select “Jupyter Notebook”.\nClick “Select Kernel” on the right then type “ist356”.\nIn the first cell, type:\nprint(\"hello world!\")\nHit the run button on the left or type SHIFT + ENTER to execute the code. You should get back “hello world!”.\nClose the ipynb file (you may optionally save it; if you do, be sure to call it something other then “Untitled.ipynb”, maybe “hello.ipynb” instead).",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "1. Project management",
+      "Installing conda"
+    ]
   }
 ]

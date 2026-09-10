@@ -2,10 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/syllabus.html</loc>
-    <lastmod>2026-08-27T15:45:47.851Z</lastmod>
+    <lastmod>2026-09-10T02:09:37.728Z</lastmod>
+  </url>
+  <url>
+    <loc>https://su-ospo.github.io/oss-course-fall-26/01_project_management/conda.html</loc>
+    <lastmod>2026-09-10T02:09:37.722Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/index.html</loc>
-    <lastmod>2026-08-27T15:45:47.851Z</lastmod>
+    <lastmod>2026-09-10T02:09:37.728Z</lastmod>
+  </url>
+  <url>
+    <loc>https://su-ospo.github.io/oss-course-fall-26/01_project_management/index.html</loc>
+    <lastmod>2026-09-10T02:09:37.723Z</lastmod>
+  </url>
+  <url>
+    <loc>https://su-ospo.github.io/oss-course-fall-26/01_project_management/conda_install.html</loc>
+    <lastmod>2026-09-10T02:09:37.723Z</lastmod>
   </url>
 </urlset>

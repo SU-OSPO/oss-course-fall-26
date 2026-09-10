@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>IST 400/600: Open Source Software Development Practicum – IST 400/600 Fall 2026</title>
+<title>Installing conda – IST 400/600 Fall 2026</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,25 +26,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-195000899b98fd87ccf92bc39a926c1a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../01_project_management/conda.html" rel="next">
+<link href="../01_project_management/index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-195000899b98fd87ccf92bc39a926c1a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -74,14 +111,14 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="IST 400/600: Open Source Software Development Practicum – IST 400/600 Fall 2026">
-<meta property="og:description" content="Syracuse University, Fall 2026">
+<meta property="og:title" content="Installing conda – IST 400/600 Fall 2026">
+<meta property="og:description" content="">
 <meta property="og:image" content="https://su-ospo.github.io/oss-course-fall-26/images/ischool_logo_reverseX2.png">
 <meta property="og:site_name" content="IST 400/600 Fall 2026">
 <meta property="og:image:height" content="105">
 <meta property="og:image:width" content="650">
-<meta name="twitter:title" content="IST 400/600: Open Source Software Development Practicum – IST 400/600 Fall 2026">
-<meta name="twitter:description" content="Syracuse University, Fall 2026">
+<meta name="twitter:title" content="Installing conda – IST 400/600 Fall 2026">
+<meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://su-ospo.github.io/oss-course-fall-26/images/ischool_logo_reverseX2.png">
 <meta name="twitter:image-height" content="105">
 <meta name="twitter:image-width" content="650">
@@ -95,14 +132,14 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">IST 400/600 Fall 2026</span>
     </a>
   </div>
           <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="https://ischool.syracuse.edu" target="_blank"> 
-<span class="menu-text"><img src="./images/ischool_logo_reverseX2.png" height="30"></span></a>
+<span class="menu-text"><img src="../images/ischool_logo_reverseX2.png" height="30"></span></a>
   </li>  
 </ul>
           <div class="quarto-navbar-tools">
@@ -115,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">IST 400/600: Open Source Software Development Practicum</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01_project_management/index.html">1. Project management</a></li><li class="breadcrumb-item"><a href="../01_project_management/conda_install.html">Installing conda</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -129,22 +166,22 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./01_project_management/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../01_project_management/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1. Project management</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_project_management/conda_install.html" class="sidebar-item-text sidebar-link">
+  <a href="../01_project_management/conda_install.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Installing conda</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_project_management/conda.html" class="sidebar-item-text sidebar-link">
+  <a href="../01_project_management/conda.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bash variables, environments, and <code>conda</code></span></a>
   </div>
 </li>
@@ -152,7 +189,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
@@ -166,19 +203,21 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#course-info" id="toc-course-info" class="nav-link active" data-scroll-target="#course-info">Course info</a></li>
-  <li><a href="#class-schedule" id="toc-class-schedule" class="nav-link" data-scroll-target="#class-schedule">Class Schedule</a></li>
-  <li><a href="#important-dates" id="toc-important-dates" class="nav-link" data-scroll-target="#important-dates">Important dates</a></li>
+  <li><a href="#step-1-install-miniconda" id="toc-step-1-install-miniconda" class="nav-link active" data-scroll-target="#step-1-install-miniconda">Step 1: Install Miniconda</a>
+  <ul class="collapse">
+  <li><a href="#maclinuxwindows-subsystem-for-linux-wsl" id="toc-maclinuxwindows-subsystem-for-linux-wsl" class="nav-link" data-scroll-target="#maclinuxwindows-subsystem-for-linux-wsl">Mac/Linux/Windows Subsystem for Linux (WSL)</a></li>
+  <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows">Windows</a></li>
+  </ul></li>
+  <li><a href="#step-2-create-a-conda-environment-and-test-it-in-vs-code" id="toc-step-2-create-a-conda-environment-and-test-it-in-vs-code" class="nav-link" data-scroll-target="#step-2-create-a-conda-environment-and-test-it-in-vs-code">Step 2: Create a conda environment and test it in VS Code</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01_project_management/index.html">1. Project management</a></li><li class="breadcrumb-item"><a href="../01_project_management/conda_install.html">Installing conda</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">IST 400/600: Open Source Software Development Practicum</h1>
-<p class="subtitle lead">Syracuse University, Fall 2026</p>
+<h1 class="title">Installing conda</h1>
 </div>
 
 
@@ -195,150 +234,96 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="course-info" class="level2">
-<h2 class="anchored" data-anchor-id="course-info">Course info</h2>
-<p><strong>Room:</strong> Hinds Hall 117</p>
-<p><strong>Time:</strong> Thursdays, 2:00PM – 4:45PM</p>
-<p><strong>Instructor:</strong> Collin Capano</p>
-<p><strong>Email:</strong> cdcapano@syr.edu</p>
-<p><strong>Office hours:</strong> Wednesdays, 2:00PM – 3:00PM in Hinds 206A, or by appointment.</p>
-<p><strong><a href="./syllabus.html">Syllabus</a></strong></p>
+<p>There are different flavors of conda: Anaconda (which is <em>not</em> open source), Miniconda, and Miniforge. I do not recommend using Anaconda unless you absolutely need some of the additional packages it comes with. Aside from being a large install, it is not technically open source, which can lead to some unexpected licensing issues.</p>
+<p>Here I provide instructions for installing <a href="https://www.anaconda.com/docs/getting-started/miniconda/install#quickstart-install-instructions">Miniconda</a></p>
+<section id="step-1-install-miniconda" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-install-miniconda">Step 1: Install Miniconda</h2>
+<section id="maclinuxwindows-subsystem-for-linux-wsl" class="level3">
+<h3 class="anchored" data-anchor-id="maclinuxwindows-subsystem-for-linux-wsl">Mac/Linux/Windows Subsystem for Linux (WSL)</h3>
+<ol type="1">
+<li><p>Open a terminal in VS Code by clicking “Terminal” -&gt; “New Terminal”.</p></li>
+<li><p>In the terminal window, type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then hit ENTER.</p></li>
+<li><p>Follow the instructions <a href="https://www.anaconda.com/docs/getting-started/miniconda/install#quickstart-install-instructions">Quickstart install instructions</a> on the Miniconda website. For WSL, select “Linux”.</p></li>
+</ol>
 </section>
-<section id="class-schedule" class="level2">
-<h2 class="anchored" data-anchor-id="class-schedule">Class Schedule</h2>
-<p><em>Note:</em> schedule subject to change as we progress through the semester.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Week</th>
-<th>Dates</th>
-<th>Topic</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>8/27</td>
-<td>Intro; project selection</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>9/3</td>
-<td>Creating and managing environments</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>9/10</td>
-<td>Git 1: Branches and merge conflicts</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>9/17</td>
-<td>Git 2: Collaborating on GitHub</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>9/24</td>
-<td>Anatomy of a software package</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>10/1</td>
-<td>Effective use of AI</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td>10/8</td>
-<td>Development day</td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td>10/15</td>
-<td>Writing and deploying CI tests via GitHub actions</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td>10/22</td>
-<td>Creating a documentation page via GitHub pages</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>10/29</td>
-<td>Choosing an open source license</td>
-</tr>
-<tr class="odd">
-<td>11</td>
-<td>11/5</td>
-<td>Packaging and deployment</td>
-</tr>
-<tr class="even">
-<td>12</td>
-<td>11/12</td>
-<td>Development models / writing a contributing guide</td>
-</tr>
-<tr class="odd">
-<td>13</td>
-<td>11/19</td>
-<td>Development day</td>
-</tr>
-<tr class="even">
-<td>14</td>
-<td>11/26</td>
-<td>Thanksgiving - no class</td>
-</tr>
-<tr class="odd">
-<td>15</td>
-<td>12/3</td>
-<td>Project presentations</td>
-</tr>
-<tr class="even">
-<td>–</td>
-<td>12/10</td>
-<td>Grad students: project papers due</td>
-</tr>
-</tbody>
-</table>
+<section id="windows" class="level3">
+<h3 class="anchored" data-anchor-id="windows">Windows</h3>
+<ol type="1">
+<li><p>Download the <a href="https://www.anaconda.com/download/success">Miniconda installer for Windows</a>. <strong>Click the Downlad button under “Miniconda Installers”, <em>not</em> the one under “Distribution Installers”.</strong></p></li>
+<li><p>Run the installer by double-clicking on the downloaded file and follow the steps below.</p>
+<ul>
+<li><p>Click “Run”.</p></li>
+<li><p>Click on “Next”.</p></li>
+<li><p>Click on “I agree”.</p></li>
+<li><p>Select “Just me” and click on “Next”.</p></li>
+<li><p>Click “Next” to install to the default destination folder.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you had tried to install miniconda previously, you may get an error that says “Directory … is not empty, please choose a different location.” <strong>Do not choose a different location.</strong> Instead, click “OK”, then rename the previous miniconda3 directory. You can do that by going to VS Code, opening a new terminal window (click “Terminal” -&gt; “New Terminal”), and entering the following (hit ENTER after each line):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> miniconda3 miniconda3-old</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then go back to the Miniconda installer and click “Next”.</p>
+</div>
+</div></li>
+<li><p>Check the option for “Add Anaconda to my PATH environment variable” and check the option for “Register Anaconda as my default Python 3.x”.</p>
+<ul>
+<li>Note that even though the installation is for Miniconda, the installer uses the word Anaconda in these options.</li>
+<li>You will also see a message in red text that selecting “Add Anaconda to my PATH environment variable” is not recommended; continue with this selection to make using conda easier in Git Bash. If you have questions or concerns, please contact your instructor.</li>
+</ul></li>
+<li><p>Click on “Install”.</p></li>
+<li><p>When the install is complete, Click on “Next”.</p></li>
+<li><p>Click on “Finish”.</p></li>
+</ul></li>
+<li><p>Open a new terminal window in VS Code by clicking “Terminal” -&gt; “New Terminal”.</p></li>
+<li><p>Type the following command to initialize conda:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> init bash</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Open a new terminal window in VS Code by either hitting the “+” key next to “bash” in the upper left of the terminal window, or by cliking “Terminal” -&gt; “New Terminal”. If conda installed successfullly, you should see <code>(base)</code> appear next to or above your command prompt.</p></li>
+</ol>
 </section>
-<section id="important-dates" class="level2">
-<h2 class="anchored" data-anchor-id="important-dates">Important dates</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 79%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Date</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>8/24</td>
-<td>First day of classes</td>
-</tr>
-<tr class="even">
-<td>9/14</td>
-<td>Academic/Financial drop deadline; Religious observance notification deadline</td>
-</tr>
-<tr class="odd">
-<td>10/12 - 10/13</td>
-<td>Fall break</td>
-</tr>
-<tr class="even">
-<td>11/20</td>
-<td>Withdrawal deadline</td>
-</tr>
-<tr class="odd">
-<td>11/22 - 11/29</td>
-<td>Thanksgiving Break</td>
-</tr>
-<tr class="even">
-<td>12/8</td>
-<td>Last day of classes</td>
-</tr>
-</tbody>
-</table>
+</section>
+<section id="step-2-create-a-conda-environment-and-test-it-in-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-create-a-conda-environment-and-test-it-in-vs-code">Step 2: Create a conda environment and test it in VS Code</h2>
+<ol type="1">
+<li><p>In the bash terminal window in VS Code (make sure it says <code>(base)</code> to the left of or above the prompt), type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> ist356 <span class="at">-c</span> conda-forge <span class="at">-y</span> python=3.11 ipykernel</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then hit ENTER.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The first time you run conda, you may get an error about Terms of Service not being accepted for certain channels. Accept the TOS for those channels by running the commands listed. For example, if one of the channels is <code>https://repo.anaconda.com/pkgs/main</code>, copy and paste the command into the terminal:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> tos accept <span class="at">--override-channels</span> <span class="at">--channel</span> https://repo.anaconda.com/pkgs/main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Followed by hitting ENTER (to execute a command in the terminal, you hit ENTER after typing/pasting it in). You’ll need to do this for each of the channels listed.</p>
+<p>Once you have accepted the TOS for all the channels, run the <code>conda create</code> command above again.</p>
+</div>
+</div></li>
+<li><p>Check to ensure your environment works:</p>
+<ol type="1">
+<li><p>Click File -&gt; “New File…”</p></li>
+<li><p>In the drop down menu, select “Jupyter Notebook”.</p></li>
+<li><p>Click “Select Kernel” on the right then type “ist356”.</p></li>
+<li><p>In the first cell, type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hello world!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Hit the run button on the left or type SHIFT + ENTER to execute the code. You should get back “hello world!”.</p></li>
+<li><p>Close the ipynb file (you may optionally save it; if you do, be sure to call it something other then “Untitled.ipynb”, maybe “hello.ipynb” instead).</p></li>
+</ol></li>
+</ol>
 
 
 </section>
@@ -744,6 +729,18 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../01_project_management/index.html" class="pagination-link" aria-label="1. Project management">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1. Project management</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../01_project_management/conda.html" class="pagination-link" aria-label="Bash variables, environments, and `conda`">
+        <span class="nav-page-text">Bash variables, environments, and <code>conda</code></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
