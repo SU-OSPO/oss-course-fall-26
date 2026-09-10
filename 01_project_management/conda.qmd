@@ -3,11 +3,11 @@ title: "Bash variables, environments, and `conda`"
 order: 2
 ---
 
-*Note: This task requires that you have conda installed already.*
-
-*Note: the first part of this tutorial uses bash, which is a shell program in
+::: callout-note
+The first part of this tutorial uses bash, which is a shell program in
 UNIX systems, such as MacOS or Linux. Windows users, you can install [WSL](https://learn.microsoft.com/en-us/windows/wsl/install), or
-[git-scm](https://git-scm.com/install/windows) if you would like to use bash.*
+[git-scm](https://git-scm.com/install/windows) if you would like to use bash.
+:::
 
 
 # Variables
@@ -142,6 +142,10 @@ When you execute any program in the shell, bash cycles through the list of paths
 
 
 # Conda
+
+::: callout-note
+This task requires that you have conda installed already.
+:::
 
 Conda is a package and environment manager. It allows you to:
 - Create isolated environments, each with its own set of packages.
