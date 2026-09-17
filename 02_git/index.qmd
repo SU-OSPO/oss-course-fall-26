@@ -99,3 +99,10 @@ You will next be prompted with a "Let's get started!" screen that will ask you t
 Overview of Git and GitHub; intro to branches in local repository
 
 <iframe id="kmsembed-1_3b4pppt4" width="640" height="360" src="https://video.syr.edu/embed/secure/iframe/entryId/1_3b4pppt4/uiConfId/45992161/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="IST 400/600 Lecture 9-10-26"></iframe>
+
+
+### 9-17-26
+
+More on merging branches: rebasing, squash and merger, resolving merge conflicts
+
+<iframe id="kmsembed-1_0gu0l4sv" width="640" height="360" src="https://video.syr.edu/embed/secure/iframe/entryId/1_0gu0l4sv/uiConfId/45992161/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="IST 400/600 Lecture 9-17-26"></iframe>
