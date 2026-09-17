@@ -298,7 +298,7 @@
     "href": "02_git/index.html#lectures",
     "title": "2. git and GitHub",
     "section": "Lectures",
-    "text": "Lectures\n\n9-10-26\nOverview of Git and GitHub; intro to branches in local repository",
+    "text": "Lectures\n\n9-10-26\nOverview of Git and GitHub; intro to branches in local repository\n\n\n\n\n9-17-26\nMore on merging branches: rebasing, squash and merger, resolving merge conflicts",
     "crumbs": [
       "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
       "2. <code>git</code> and GitHub"
