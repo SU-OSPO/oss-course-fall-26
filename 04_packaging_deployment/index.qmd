@@ -1,0 +1,25 @@
+---
+title: "4. Packaging and Deployment"
+toc: true
+order: 4
+---
+
+## Slides
+
+[download PDF](SoftwarePackaging.pdf)
+
+<object data="SoftwarePackaging.pdf" type="application/pdf" width="100%" height="600" style="border: 1px solid #ccc;">
+Your browser cannot display PDFs inline. <a href="EffectiveAI.pdf">Download the slides</a> instead.
+</object>
+
+## Lecture - 10/15/26
+
+Packaging and Deployment 1: code organization, version numbering, deployment; Python standards
+
+<iframe id="kmsembed-1_fj8ljkzr" width="640" height="360" src="https://video.syr.edu/embed/secure/iframe/entryId/1_fj8ljkzr/uiConfId/45992161/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="IST 400/600 Lecture 10-15-26"></iframe>
+
+## Lecture - 10/29/26
+
+Packaging and Deployment 2: documenting with Sphinx; R packaging and deployment; common website organization; JOSS papers.
+
+<iframe id="kmsembed-1_apdc5p90" width="640" height="360" src="https://video.syr.edu/embed/secure/iframe/entryId/1_apdc5p90/uiConfId/45992161/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="IST 400/600 Lecture 10-29-26"></iframe>
