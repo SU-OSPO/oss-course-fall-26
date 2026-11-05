@@ -628,10 +628,231 @@ know what the parts of a workflow file do, you'll be able to read a template
 and tweak it to fit your project.
 :::
 
-## VI. Wrapping up
+## VI. Putting it into practice: contributing to a partner's repository
 
-Your fork's `main` branch on GitHub now has a new commit that your local
-repository doesn't know about. Let's sync it.
+So far you've only opened pull requests on your own fork. In a real project,
+the point of CI is that it checks contributions from *other* people. Let's
+try that out by contributing a new feature to a partner's fork of `toymath`.
+You and your partner will each contribute to the other's repository at the
+same time.
+
+### 12. Add your partner's fork as a remote
+
+1.  Find a partner. Exchange the web addresses of your forks of `toymath`
+    with each other. Your partner's should look like
+    `https://github.com/PARTNER_USERNAME/toymath`, where `PARTNER_USERNAME` is
+    their GitHub username.
+
+    ::: {.callout-important}
+    Before continuing, make sure that **both** of you have finished
+    [step 11](#merge-the-pull-request), so that your `main` branches on GitHub
+    have the `Tests` workflow in them.
+    :::
+
+2.  Your local repository currently only knows about one remote repository:
+    your fork, which is called `origin`. You can add as many other remotes as
+    you like. In your terminal, add your partner's fork as a remote called
+    `partner`:
+
+    ```bash
+    git remote add partner https://github.com/PARTNER_USERNAME/toymath.git
+    ```
+
+    (We can use the HTTPS URL here, rather than SSH, since we're only going to
+    download things from your partner's fork, not push to it.) Now run:
+
+    ```bash
+    git remote -v
+    ```
+
+    You should see both `origin` and `partner` listed.
+
+3.  Download the latest changes from your partner's fork:
+
+    ```bash
+    git fetch partner
+    ```
+
+    This will tell you about the branches on your partner's fork, such as
+    `partner/main`.
+
+### 13. Add new functions
+
+1.  Create a new development branch, starting from your *partner's* `main`
+    branch:
+
+    ```bash
+    git checkout -b add-mult-div partner/main
+    ```
+
+    Why start from `partner/main` instead of your own `main`? Since you and your
+    partner both squashed and merged your CI changes, your `main` branches have
+    the same files, but different commits. If you started from your own
+    `main`, your pull request would include your squashed commit in addition
+    to your new changes, making it confusing to review. Starting from
+    `partner/main` ensures that your pull request contains only the new
+    changes.
+
+2.  Use your favorite text editor to open `toymath/functions.py` and add the
+    following to the end of it:
+
+    ```python
+
+
+    def multiply(a, b):
+        """Return the product of a and b."""
+        return a * b
+
+
+    def divide(a, b):
+        """Return a divided by b."""
+        return a / b
+    ```
+
+3.  We also need to tell the package about the new functions so that users can
+    import them with `from toymath import multiply, divide`. Open
+    `toymath/__init__.py` and change it so that it reads:
+
+    ```python
+    """A toy math package."""
+
+    from .functions import add, subtract, multiply, divide
+
+    __all__ = ["add", "subtract", "multiply", "divide"]
+    ```
+
+    Since the `toymath_calculator` program uses `__all__` to decide what
+    operations are available, you should now be able to run:
+
+    ```bash
+    toymath_calculator multiply 3 4
+    ```
+
+    and get back `12.0`. (Recall that we installed `toymath` in editable
+    mode, so you don't need to re-install it to pick up the changes.)
+
+:::: {.callout-caution appearance="simple" icon="false"}
+#### Challenge: Test the new functions
+
+New code should come with new tests! Add a round-trip test for `multiply` and
+`divide` to `tests/test_functions.py`, similar to the one we wrote for `add`
+and `subtract`. Run `pytest` to make sure that your new test passes.
+
+*Hint:* be careful what numbers you choose. What happens if you try to divide
+by zero?
+
+::: {.callout-caution collapse="true" appearance="simple" icon="false"}
+##### Solution
+
+Change the import at the top of `tests/test_functions.py` so that it imports
+the new functions:
+
+```python
+from toymath import add, subtract, multiply, divide
+```
+
+Then add the following to the end of the file:
+
+```python
+
+
+def test_multiply_divide_roundtrip():
+    """Check that dividing the product of a and b by a gives back b."""
+    for a, b in [(3, 5), (-2, 7), (10, 0)]:
+        c = multiply(a, b)
+        assert divide(c, a) == b
+```
+
+Here we multiply `a` and `b` to get `c`, then divide `c` by `a`, which should
+give back `b`. Since we divide by `a`, we have to make sure that none of our
+values of `a` are zero. (It's fine for `b` to be zero, though.)
+
+Then run:
+
+```bash
+pytest
+```
+
+You should see `2 passed`.
+:::
+::::
+
+### 14. Open a pull request on your partner's repository
+
+1.  Once your tests pass, commit your changes:
+
+    ```bash
+    git add -u
+    git commit -m "add multiply and divide functions"
+    ```
+
+    (We can use `git add -u` here since we only modified files that `git` is
+    already tracking.)
+
+2.  Push your branch to **your fork** (remember, you can't push to your
+    partner's fork):
+
+    ```bash
+    git push -u origin add-mult-div
+    ```
+
+3.  Go to your fork on GitHub and click the `Compare & pull request` button.
+    This time, set the base repository to **your partner's fork**: click the
+    "base repository" drop-down button and select `PARTNER_USERNAME/toymath`.
+    Make sure that the base branch is `main`, and that you're comparing
+    `YOUR_USERNAME/toymath`'s `add-mult-div` branch. Double-check that the
+    "Files changed" at the bottom of the page shows only your changes to
+    `functions.py`, `__init__.py`, and `test_functions.py`.
+
+4.  Add a short description of what your pull request does, then click
+    `Create pull request`.
+
+### 15. Review your partner's pull request
+
+Your partner has now opened a pull request on *your* fork. Go to your fork on
+GitHub and click on the `Pull requests` tab. You should see their pull
+request. Click on it.
+
+::: {.callout-note}
+For security reasons, GitHub may not automatically run workflows on pull
+requests from people who haven't contributed to your repository before. If you
+see a message saying that workflows are awaiting approval, click
+`Approve and run` (or `Approve workflows to run`). In general, you should look
+over the changes in a pull request from a new contributor before approving
+its workflows, since the workflows will run the code in the pull request!
+:::
+
+1.  Scroll to the bottom of the pull request and look at the checks. These are
+    the nine `Tests` checks that *you* set up. GitHub is running your
+    partner's new code, along with your partner's new test, on three operating
+    systems and three versions of Python. Wait for them to finish. Do they all
+    pass? If not, click on the failed checks to see why, and leave a comment
+    on the pull request letting your partner know what went wrong. They can
+    fix the problem by pushing new commits to their `add-mult-div` branch,
+    which will automatically update the pull request and re-run the checks.
+
+2.  Click on the `Files changed` tab to review the code. Does it look right?
+    Did your partner include a test for the new functions? You can leave a
+    comment on a specific line by hovering over it and clicking the blue `+`
+    button that appears.
+
+3.  When you're satisfied with the changes, click the green `Review changes`
+    (or `Submit review`) button in the upper right of the `Files changed` tab,
+    select `Approve`, and click `Submit review`.
+
+4.  Go back to the `Conversation` tab. At the bottom, click the drop-down arrow
+    next to the merge button, select "Squash and merge," then click
+    `Confirm squash and merge`.
+
+Congratulations! You and your partner have each contributed a new feature to
+the other's repository, with CI checking every contribution along the way.
+This is exactly how contributions to large open source projects work.
+
+## VII. Wrapping up
+
+Your fork's `main` branch on GitHub now has new commits that your local
+repository doesn't know about: your squashed CI changes, and your partner's
+new functions. Let's sync them.
 
 1.  In your terminal, switch back to `main` and pull the changes:
 
@@ -640,21 +861,39 @@ repository doesn't know about. Let's sync it.
     git pull
     ```
 
-    Run `ls .github/workflows`. You should see `tests.yml`.
+    Run `ls .github/workflows`. You should see `tests.yml`. Open
+    `toymath/functions.py`; you should see your partner's `multiply` and
+    `divide` functions.
 
-2.  Delete your local copy of the `add-ci-tests` branch:
+2.  Delete your local copies of the `add-ci-tests` and `add-mult-div`
+    branches:
 
     ```bash
-    git branch -D add-ci-tests
+    git branch -D add-ci-tests add-mult-div
     ```
 
-    Note that we had to use a capital `-D` here. That's because we squashed
-    the commits on `add-ci-tests` when we merged, so `git` doesn't see the
-    individual commits on that branch in `main`. It'll warn you that the
-    branch isn't fully merged if you use `-d`. The capital `-D` forces the
-    deletion.
+    Note that we had to use a capital `-D` here. That's because the commits
+    on these branches were squashed when they were merged, so `git` doesn't
+    see the individual commits on those branches in `main`. It'll warn you
+    that the branches aren't fully merged if you use `-d`. The capital `-D`
+    forces the deletion.
+
+3.  You can also delete the `add-mult-div` branch on your fork on GitHub,
+    either on the "View all branches" page or by running:
+
+    ```bash
+    git push origin --delete add-mult-div
+    ```
+
+4.  Finally, if you no longer need to get changes from your partner's fork,
+    you can remove it as a remote:
+
+    ```bash
+    git remote remove partner
+    ```
 
 Congratulations! Your repository now automatically runs its tests on three
 operating systems and three versions of Python every time someone opens a
-pull request. In the [next tutorial](tutorial2.qmd) we'll use GitHub Actions
-to build and publish documentation for `toymath`.
+pull request, and you've seen how CI helps you review contributions from
+others. In the [next tutorial](tutorial2.qmd) we'll use GitHub Actions to
+build and publish documentation for `toymath`.
