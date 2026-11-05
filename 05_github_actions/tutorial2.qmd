@@ -1,0 +1,423 @@
+---
+title: "2. Building and deploying documentation to GitHub Pages"
+order: 2
+---
+
+In this tutorial you will create documentation for `toymath` using
+[Sphinx](https://www.sphinx-doc.org), then write a GitHub Actions workflow
+that automatically builds the documentation and publishes it as a website
+using [GitHub Pages](https://docs.github.com/en/pages). Every time a change is
+merged into `main`, the website will update itself. This is an example of
+*continuous deployment*.
+
+This tutorial picks up where [Part 1](tutorial1.qmd) left off. You should
+have your fork of `toymath` cloned to your computer, with the `tests.yml` and
+`pylint.yml` workflows merged into `main`.
+
+## I. Create the documentation
+
+### 1. Set up a branch and install Sphinx
+
+1.  In your terminal, `cd` into your `toymath` repository and activate the
+    environment you created in Part 1:
+
+    ```bash
+    conda activate toymath
+    ```
+
+2.  Make sure your `main` branch is up to date with your fork on GitHub, then
+    create a new branch to work on:
+
+    ```bash
+    git checkout main
+    git pull
+    git checkout -b add-docs
+    ```
+
+3.  Install Sphinx:
+
+    ```bash
+    pip install sphinx
+    ```
+
+    (As with `pytest`, `sphinx` is also listed in the optional dependencies in
+    `pyproject.toml`, under `docs`. So you could have instead run
+    `pip install -e ".[docs]"`.)
+
+### 2. Run `sphinx-quickstart`
+
+Sphinx comes with a program called `sphinx-quickstart` that sets up the files
+you need to get started. From the top level of your repository, run:
+
+```bash
+sphinx-quickstart docs
+```
+
+This will create a directory called `docs` and put the documentation files
+in it. `sphinx-quickstart` will ask you a few questions. Answer them as
+follows:
+
+-   `Separate source and build directories (y/n) [n]:` Just hit Enter to
+    accept the default (`n`).
+-   `Project name:` type `toymath`
+-   `Author name(s):` type your name
+-   `Project release []:` type `0.1.0` (this is the version of `toymath`
+    listed in `pyproject.toml`)
+-   `Project language [en]:` Just hit Enter to accept the default (English).
+
+When it finishes, run `ls docs`. You should see:
+
+```bash
+Makefile    _build      _static     _templates  conf.py     index.rst   make.bat
+```
+
+The two files we care about are:
+
+-   `conf.py`: Sphinx's configuration file. Take a look at it. It's a Python
+    file that sets things like the project name and the
+    [theme](https://sphinx-themes.org/) to use for the website.
+-   `index.rst`: The front page of your documentation. Sphinx uses
+    [reStructuredText](https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html)
+    (`.rst`) files by default, which are similar to Markdown files, but with a
+    slightly different syntax.
+
+### 3. Add some content
+
+Open `docs/index.rst` in your favorite text editor. Just after the title
+(which is underlined with `===`), add a short description of the package so
+that the top of the file reads:
+
+```rst
+toymath documentation
+=====================
+
+``toymath`` is a toy Python package that adds and subtracts numbers.
+To install it, run ``pip install .`` from the top level of the repository.
+```
+
+(Note that in reStructuredText you need to use *double* backticks to format
+something as code, rather than the single backticks used in Markdown.) Leave
+the rest of the file as it is.
+
+### 4. Build the documentation on your computer
+
+1.  From the top level of your repository, run:
+
+    ```bash
+    sphinx-build -M html docs docs/_build
+    ```
+
+    This tells Sphinx to build `html` (i.e., a website) from the source files
+    in `docs`, and to put the result in `docs/_build`. At the end you should
+    see:
+
+    ```bash
+    build succeeded.
+
+    The HTML pages are in docs/_build/html.
+    ```
+
+    ::: {.callout-note}
+    `sphinx-quickstart` also created a `Makefile` (and a `make.bat` file for
+    Windows) in `docs`, so you could also build the documentation by running
+    `make html` from inside the `docs` directory. We use `sphinx-build`
+    directly here since it works the same way on all operating systems.
+    :::
+
+2.  Sphinx created a bunch of HTML files in `docs/_build/html`. Open
+    `docs/_build/html/index.html` in your web browser. You can do that by
+    double-clicking on the file in Finder (Mac) or File Explorer (Windows), or
+    by running the following in your terminal:
+
+    * Mac: `open docs/_build/html/index.html`
+    * Windows: `start docs/_build/html/index.html`
+    * Linux: `xdg-open docs/_build/html/index.html`
+
+    You should see a simple website with the title "toymath documentation" and
+    the description you added. You've built a documentation website!
+
+3.  Try changing something in `docs/index.rst`, re-run the `sphinx-build`
+    command, then refresh your browser to see the change.
+
+### 5. Commit the documentation
+
+We don't want to commit the files in `docs/_build`. They're generated from
+the source files, so anyone can re-create them by running `sphinx-build`.
+(And, as we'll see shortly, GitHub Actions will create them for us.)
+
+1.  Tell `git` to ignore the build directory by adding the following line to the
+    end of the `.gitignore` file at the top level of your repository:
+
+    ```bash
+    _build/
+    ```
+
+    Now run `git status`. You should see `.gitignore` as modified, and `docs/`
+    as untracked. If you see anything in `docs/_build` listed, double-check
+    your `.gitignore`.
+
+2.  Add and commit the changes:
+
+    ```bash
+    git add .gitignore docs
+    git commit -m "add sphinx documentation"
+    ```
+
+## II. Create a workflow to build and deploy the documentation
+
+Now let's have GitHub build the documentation and publish it to a website.
+GitHub has a service called [GitHub Pages](https://docs.github.com/en/pages)
+that will host a static website for any public repository, for free. By
+default, the website for a repository lives at
+`https://YOUR_USERNAME.github.io/REPOSITORY_NAME/`.
+
+### 6. Turn on GitHub Pages
+
+First, we need to tell GitHub that we want to publish a website for our fork,
+and that we'll use GitHub Actions to do it.
+
+1.  Go to your fork on GitHub (`https://github.com/YOUR_USERNAME/toymath`)
+    and click on the `Settings` tab at the top.
+
+2.  Click on `Pages` in the menu on the left.
+
+3.  Under "Build and deployment," click the "Source" drop-down menu and select
+    `GitHub Actions`.
+
+That's it! There's nothing to save; GitHub will now wait for a workflow to
+give it a website to publish.
+
+### 7. Write the workflow
+
+Use your favorite text editor to create a file called
+`.github/workflows/docs.yml` and put the following in it:
+
+```yaml
+name: Docs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Install Sphinx
+        run: |
+          python -m pip install --upgrade pip
+          pip install sphinx
+
+      - name: Build the documentation
+        run: sphinx-build -M html docs docs/_build
+
+      - name: Upload the website
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs/_build/html
+
+  deploy:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+```
+
+There's a lot here. Let's go through it.
+
+-   **`on`**: This is the same as our `tests.yml` workflow: the workflow will
+    run on every pull request, and every time something is pushed to `main`.
+
+-   **The `build` job**: The first few steps should look familiar. We check
+    out the repository, install Python, then install Sphinx. We then build the
+    documentation using the same `sphinx-build` command you ran on your
+    computer. The last step uses the `actions/upload-pages-artifact` action to
+    package up the website in `docs/_build/html` and save it.
+
+    ::: {.callout-note}
+    Remember that every job runs on a fresh computer. When a job ends, the
+    computer is thrown away, along with any files that were created on it! If
+    you want to keep a file created by a job, you have to save it as an
+    *artifact*. Artifacts are stored by GitHub after the job is done, and can
+    be passed to other jobs or downloaded (you'll see them listed at the
+    bottom of a workflow's page on the `Actions` tab).
+    `actions/upload-pages-artifact` saves the website as a specially formatted
+    artifact that GitHub Pages knows how to publish.
+    :::
+
+-   **The `deploy` job**: This job takes the artifact created by the `build`
+    job and publishes it to GitHub Pages using the `actions/deploy-pages`
+    action. There are a few new things here:
+
+    * `needs: build` tells GitHub that this job depends on the `build` job.
+      By default, all the jobs in a workflow run at the same time. With
+      `needs`, the `deploy` job won't start until `build` finishes, and it
+      won't run at all if `build` fails.
+    * `if: github.event_name == 'push'` tells GitHub to only run this job if
+      the workflow was triggered by a push (i.e., to `main`). When the workflow
+      is triggered by a pull request, the `build` job will still run (which
+      checks that the documentation builds without errors), but the `deploy`
+      job will be skipped. We don't want to publish the website until the
+      changes are merged!
+    * `permissions` gives the job permission to publish to GitHub Pages.
+      Workflows have very limited permissions by default; you have to
+      explicitly ask for anything beyond reading the repository.
+    * `environment` tells GitHub that this job deploys to the `github-pages`
+      environment, which GitHub created when you turned on Pages in the last
+      step. The `url` will be shown on the workflow's page, so you can click
+      straight through to your website.
+
+### 8. Commit, push, and open a pull request
+
+1.  Commit the workflow and push your branch to your fork:
+
+    ```bash
+    git add .github/workflows/docs.yml
+    git commit -m "add workflow to build and deploy docs"
+    git push -u origin add-docs
+    ```
+
+2.  Go to your fork on GitHub and click `Compare & pull request`. **As in
+    Part 1, change the base repository to `YOUR_USERNAME/toymath`**, so that
+    you're merging `add-docs` into the `main` branch of *your* fork, not the
+    upstream repository. Then click `Create pull request`.
+
+3.  Scroll to the bottom of the pull request and look at the checks. You'll
+    see the nine `Tests` checks from Part 1, along with
+    `Docs / build (pull_request)` and `Docs / deploy (pull_request)`. Once
+    they finish, `Docs / build` should pass, and `Docs / deploy` should say
+    "Skipped," since this is a pull request, not a push to `main`.
+
+## III. Fixing a failed check
+
+### 9. Pylint is unhappy
+
+You'll also see the `Pylint` checks. Unlike the others, they should have
+failed! Click on one of them and expand the "Analysing the code with pylint"
+step. You'll see something like:
+
+```bash
+************* Module conf
+docs/conf.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+docs/conf.py:10:0: W0622: Redefining built-in 'copyright' (redefined-builtin)
+docs/conf.py:9:0: C0103: Constant name "project" doesn't conform to UPPER_CASE naming style (invalid-name)
+...
+Your code has been rated at 6.50/10
+```
+
+What happened? Our Pylint workflow runs on every Python file in the
+repository, and `docs/conf.py` is a Python file. The `conf.py` that
+`sphinx-quickstart` created doesn't follow all of Pylint's style rules. Pylint
+doesn't like that it doesn't have a docstring; that it uses lowercase names for
+variables defined at the top of a module (Pylint thinks these should be
+`UPPER_CASE`, since they look like constants); and that it defines a variable
+called `copyright`, which is the name of a built-in Python function.
+
+This is exactly what CI is for: catching problems that you didn't notice on
+your own computer. In this case the "problems" are with style, not
+correctness, and Sphinx requires the variables in `conf.py` to have the names
+they do. So rather than renaming the variables, we'll tell Pylint to skip
+those particular checks for this file.
+
+1.  Open `docs/conf.py` in your favorite text editor and add the following
+    two lines to the very top of the file:
+
+    ```python
+    """Configuration file for the Sphinx documentation builder."""
+    # pylint: disable=invalid-name,redefined-builtin
+    ```
+
+    The first line adds a module docstring. The second is a special comment
+    that tells Pylint to ignore the `invalid-name` and `redefined-builtin`
+    checks for this file.
+
+2.  If you'd like to check this on your computer before pushing, install
+    Pylint and run it the same way the workflow does:
+
+    ```bash
+    pip install pylint
+    pylint $(git ls-files '*.py')
+    ```
+
+    You should get a rating of 10.00/10.
+
+3.  Commit and push the fix:
+
+    ```bash
+    git add -u
+    git commit -m "fix pylint errors in docs/conf.py"
+    git push
+    ```
+
+4.  Go back to your pull request and wait for the checks to finish. This time
+    they should all pass (with `Docs / deploy` skipped).
+
+## IV. Merge and see the result
+
+### 10. Merge the pull request
+
+1.  Merge the pull request (either a normal merge or a squash and merge is fine
+    here), then delete the `add-docs` branch on GitHub.
+
+2.  Click on the `Actions` tab, then click on the latest run of the `Docs`
+    workflow. Since merging the pull request pushed to `main`, this time
+    *both* jobs will run: first `build`, then `deploy`. You'll see a diagram
+    showing the `build` job connected to the `deploy` job by a line. That's
+    the `needs: build` at work.
+
+3.  Once the `deploy` job finishes, a link to your website will appear under
+    the `deploy` box in the diagram. Click on it (or go to
+    `https://YOUR_USERNAME.github.io/toymath/`). You should see the same
+    documentation that you built on your own computer, now published on the
+    web for anyone to see!
+
+::: {.callout-tip}
+To make your documentation easy to find, add a link to it on your
+repository's front page. Go to your fork's main page on GitHub, click the
+gear icon next to "About" on the right, check the box that says "Use your
+GitHub Pages website," then click `Save changes`.
+:::
+
+### 11. Sync your local repository
+
+Finally, update your local repository so that it has the merged changes:
+
+```bash
+git checkout main
+git pull
+git branch -D add-docs
+```
+
+From now on, any time you update the documentation and merge it into `main`,
+your website will update itself automatically. Try it out: make a change to
+`docs/index.rst` on a new branch, open a pull request, merge it, and watch
+your website change.
+
+::: {.callout-note}
+The documentation we created here is very minimal. Real projects use Sphinx
+extensions like
+[autodoc](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html)
+to generate documentation for every function in the package automatically
+from their docstrings, and add pages with installation instructions,
+tutorials, and examples. We talked about these in the [packaging and
+deployment lecture](../04_packaging_deployment/index.qmd). Since the workflow
+just runs `sphinx-build`, all of that would be published to your website too.
+:::

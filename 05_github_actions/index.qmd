@@ -1,0 +1,55 @@
+---
+title: "5. GitHub Actions"
+toc: true
+order: 5
+---
+
++------------------------------------------------------------------------+
+| Objectives                                                             |
++========================================================================+
+| -   Learn what continuous integration (CI) is and why it's useful.     |
+| -   Write GitHub Actions workflows to automatically run unit tests.    |
+| -   Use GitHub Actions to build and deploy a website to GitHub Pages.  |
++------------------------------------------------------------------------+
+
+[GitHub Actions](https://docs.github.com/en/actions) is GitHub's tool for
+automating tasks in your repository. You tell GitHub what to do (e.g., "install
+my package and run the tests") and when to do it (e.g., "every time someone
+opens a pull request") by writing a *workflow* file. GitHub then runs the
+workflow for you on one of its computers (called a *runner*) and reports the
+results back to you.
+
+This is incredibly useful for open source projects. Two common uses are:
+
+-   **Continuous integration (CI)**: automatically running your project's tests
+    on every pull request, so you know whether a change breaks anything
+    *before* it's merged.
+-   **Continuous deployment (CD)**: automatically building and publishing
+    things, like your project's documentation or website, whenever changes are
+    merged.
+
+In fact, the website you're reading right now is built and deployed by a GitHub
+Action every time I push a change to the course repository!
+
+## Prerequisites
+
+These tutorials build on things we've done earlier in the semester. You will need:
+
+-   **conda**: If you don't have it, see the [Miniconda install
+    instructions](../01_project_management/conda_install.qmd).
+-   **git and a GitHub account**: You'll need to be able to clone, push, and
+    pull from GitHub, and you should be comfortable with branches, forks, and
+    pull requests. If you need a refresher, see the [git and GitHub
+    tutorials](../02_git/index.qmd). In particular, you'll need to have set up
+    authentication with GitHub, as described in
+    [Part 2](../02_git/cli/exercise2.qmd#prerequisites-github-authentication).
+
+The tutorials are written for the command line. If you prefer to use GitHub
+Desktop for the `git` steps, that's fine; the GitHub Actions parts are the same
+either way.
+
+## Tutorials
+
+-   [Part 1](tutorial1.qmd): Continuous integration: automatically running unit tests
+-   [Part 2](tutorial2.qmd): Building and deploying documentation to GitHub Pages
+-   [Part 3](tutorial3.qmd): Challenge: deploying a Hugo website to GitHub Pages

@@ -1,0 +1,776 @@
+---
+title: "1. Continuous integration: automatically running unit tests"
+order: 1
+---
+
+In this tutorial you will add unit tests to a simple Python package, then
+write a GitHub Actions workflow that automatically runs those tests every time
+you open or update a pull request. This is known as *continuous integration*
+(CI). Nearly every open source project of any size uses some form of CI, since
+it lets maintainers know right away whether a contribution breaks anything.
+
+For this exercise we'll use a toy Python package that I created called
+[`toymath`](https://github.com/SU-OSPO/toymath). It contains a couple of
+functions for doing (very) simple math.
+
+## I. Set up the repository
+
+### 1. Fork, clone, and create a branch
+
+:::: {.callout-caution appearance="simple" icon="false"}
+#### Challenge
+
+Use what you learned in the [git and GitHub tutorials](../02_git/index.qmd) to:
+
+1.  Create a fork of https://github.com/SU-OSPO/toymath under your GitHub account.
+
+2.  Clone **your fork** to your local computer.
+
+3.  In your local repository, create and switch to a new branch called `add-ci-tests`.
+
+Try to do this on your own. If you can't remember how, refer back to
+[Part 2](../02_git/cli/exercise2.qmd) and [Part 3](../02_git/cli/exercise3.qmd)
+of the git tutorials. If you're still stuck, expand the solution below.
+
+::: {.callout-caution collapse="true" appearance="simple" icon="false"}
+##### Solution
+
+1.  Go to https://github.com/SU-OSPO/toymath and click the `Fork` button in the
+    upper right. On the "Create a new fork" page, select **your username** under
+    "Owner" and leave the repository name as `toymath`. Click the green
+    `Create fork` button. You'll be redirected to your fork, which will have a
+    URL like `https://github.com/YOUR_USERNAME/toymath`.
+
+2.  On your fork's webpage, click the green `<> Code` button, select the "SSH"
+    tab, and copy the URL. It should look like
+    `git@github.com:YOUR_USERNAME/toymath.git`. Then, in a terminal, `cd` to the
+    directory you'd like to keep the repository in and run:
+
+    ```bash
+    git clone git@github.com:YOUR_USERNAME/toymath.git
+    cd toymath
+    ```
+
+    (If you're using VS Code for authentication instead of an SSH key, copy the
+    HTTPS URL instead and use the "Git: Clone" command in the command palette,
+    as described in [Part 2](../02_git/cli/exercise2.qmd#if-you-are-using-vs-code)
+    of the git tutorials.)
+
+3.  Run:
+
+    ```bash
+    git checkout -b add-ci-tests
+    ```
+
+    You can verify you're on the new branch by running `git branch`.
+:::
+::::
+
+Take a look around the repository. The package's source code is in the
+`toymath` directory. The functions we care about are in
+`toymath/functions.py`:
+
+```python
+"""Basic arithmetic functions."""
+
+
+def add(a, b):
+    """Return the sum of a and b."""
+    return a + b
+
+
+def subtract(a, b):
+    """Return a minus b."""
+    return a - b
+```
+
+There's also a `pyproject.toml` file, which tells `pip` how to install the
+package (we covered this in the [packaging and deployment
+lecture](../04_packaging_deployment/index.qmd)). Notice what's *not* there:
+any tests!
+
+### 2. Create a conda environment and install `toymath`
+
+Let's create a new conda environment to develop `toymath` in. From the
+`toymath` directory, run:
+
+```bash
+conda create -n toymath python=3.13
+conda activate toymath
+```
+
+Now install `toymath` into the environment:
+
+```bash
+pip install -e .
+```
+
+The `.` tells `pip` to install the package in the current directory. The `-e`
+flag installs it in *editable* mode. This means that rather than copying the
+source code into your environment, `pip` points the environment to the source
+code in your repository. That way, any changes you make to the code will be
+picked up immediately, without having to re-install the package. This is what
+you usually want to do when developing a package.
+
+To check that the install worked, try out the command-line program that comes
+with `toymath`:
+
+```bash
+toymath_calculator add 2 3
+```
+
+You should get back `5.0`.
+
+## II. Write and run unit tests
+
+### 3. Write a test
+
+We'll use [`pytest`](https://docs.pytest.org) to test our code. `pytest` looks
+for files whose names start with `test_`, then runs any function in those files
+whose name starts with `test_`. If the function runs without error, the test
+passes. If it raises an error, the test fails. Typically, tests use Python's
+`assert` statement to check that a function returns what we expect; `assert`
+will raise an error if the statement following it is `False`.
+
+1.  In the top level of your repository, create a directory called `tests`:
+
+    ```bash
+    mkdir tests
+    ```
+
+2.  Use your favorite text editor to create a file called `tests/test_functions.py`
+    and put the following in it:
+
+    ```python
+    """Unit tests for the functions in toymath."""
+
+    from toymath import add, subtract
+
+
+    def test_add_subtract_roundtrip():
+        """Check that subtracting a from the sum of a and b gives back b."""
+        for a, b in [(3, 5), (-2, 7), (10, 0)]:
+            c = add(a, b)
+            assert subtract(c, a) == b
+    ```
+
+    This is called a *round-trip* test: we add two numbers `a` and `b` to get
+    `c`, then subtract `a` from `c`. If both `add` and `subtract` are working
+    correctly, we should get back `b`. We do this for a few different pairs of
+    numbers to make sure it isn't working just by chance.
+
+### 4. Run the tests
+
+1.  Install `pytest` into your environment:
+
+    ```bash
+    pip install pytest
+    ```
+
+    ::: {.callout-tip}
+    Take a look at `pyproject.toml`. You'll see a `[project.optional-dependencies]`
+    section with `test = ["pytest"]`. This is a common way to list the extra
+    packages that developers need to run the tests. Instead of installing
+    `pytest` directly, you could have run `pip install -e ".[test]"`, which would
+    install `toymath` along with everything in the `test` list.
+    :::
+
+2.  From the top level of your repository, run:
+
+    ```bash
+    pytest
+    ```
+
+    `pytest` will find your test and run it. You should see something like:
+
+    ```bash
+    ============================= test session starts ==============================
+    ...
+    collected 1 item
+
+    tests/test_functions.py .                                                [100%]
+
+    ============================== 1 passed in 0.01s ===============================
+    ```
+
+    The `.` after the file name means the test passed. Congratulations, you've
+    written and run your first unit test!
+
+3.  Commit your new test:
+
+    ```bash
+    git add tests/test_functions.py
+    git commit -m "add round-trip test for add and subtract"
+    ```
+
+## III. Create a GitHub workflow to run the tests
+
+Running the tests on your own computer is great, but it relies on everyone
+remembering to do it. It also only tells you whether the tests pass on *your*
+computer, with *your* operating system and *your* version of Python. Let's have
+GitHub run the tests for us automatically.
+
+GitHub Actions are configured by *workflow* files. These are
+[YAML](https://en.wikipedia.org/wiki/YAML) files that live in the
+`.github/workflows` directory of your repository. GitHub automatically looks
+for files in that directory and runs them when the conditions you specify are
+met.
+
+We'll write the workflow by hand so that you can see what each part does.
+For more details than are given here, see GitHub's
+[Creating an example workflow](https://docs.github.com/en/actions/tutorials/create-an-example-workflow)
+tutorial.
+
+### 5. Write the workflow file
+
+1.  Create the `.github/workflows` directory. From the top level of your repository run:
+
+    ```bash
+    mkdir -p .github/workflows
+    ```
+
+    (Note the `.` at the start of `.github`! Since it starts with a `.`, it is
+    a hidden directory; you'll need to run `ls -a` to see it.)
+
+2.  Use your favorite text editor to create a file called
+    `.github/workflows/tests.yml`. We'll build it up a piece at a time.
+
+3.  First, give the workflow a name and tell GitHub when to run it. Add the
+    following to `tests.yml`:
+
+    ```yaml
+    name: Tests
+
+    on:
+      push:
+        branches: [main]
+      pull_request:
+    ```
+
+    The `name` is what will show up on GitHub when the workflow runs. The `on`
+    section lists the *events* that trigger the workflow. Here we've said to
+    run the workflow whenever anything is pushed to the `main` branch, and
+    whenever a pull request is opened or updated. (There are many other
+    events you can trigger on; see
+    [Events that trigger workflows](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows)
+    for the full list.)
+
+    ::: {.callout-warning}
+    Indentation matters in YAML! It's how YAML knows what belongs to what.
+    Always use spaces, never tabs, and be consistent. If your workflow doesn't
+    run, the first thing to check is your indentation.
+    :::
+
+4.  Next, add a *job*. A workflow is made up of one or more jobs, each of
+    which runs on its own fresh computer (a *runner*). Add the following below
+    what you have:
+
+    ```yaml
+
+    jobs:
+      test:
+        runs-on: ubuntu-latest
+    ```
+
+    `test` is the ID of the job; you can call it whatever you like.
+    `runs-on` tells GitHub what operating system to use for the runner. Here
+    we're using the latest version of Ubuntu Linux that GitHub provides.
+
+5.  Finally, tell the job what to do by giving it a list of *steps*. Add the
+    following under `runs-on` (note the indentation: `steps` should line up
+    with `runs-on`):
+
+    ```yaml
+        steps:
+          - name: Check out the repository
+            uses: actions/checkout@v7
+
+          - name: Set up Python
+            uses: actions/setup-python@v7
+            with:
+              python-version: "3.13"
+
+          - name: Install toymath and pytest
+            run: |
+              python -m pip install --upgrade pip
+              pip install . pytest
+
+          - name: Run the tests
+            run: pytest
+    ```
+
+    Each step starts with a `-` and has an optional `name`, which is what
+    you'll see on GitHub. The steps run in order. There are two kinds of
+    steps:
+
+    * Steps with `run` execute commands on the command line of the runner,
+      just like you would in your terminal. The `|` lets us put several
+      commands on separate lines.
+    * Steps with `uses` run an *action*: a reusable piece of code that someone
+      else wrote to do a common task. The text after `uses` is the GitHub
+      repository the action lives in followed by `@` and the version to use;
+      e.g., `actions/checkout@v7` is version 7 of
+      https://github.com/actions/checkout. Some actions take inputs, which are
+      given in the `with` section.
+
+    Remember that each job runs on a brand new computer with nothing on it. So
+    our job has to do everything you did on your computer to run the tests:
+
+    * `actions/checkout` downloads a copy of your repository onto the runner.
+    * `actions/setup-python` installs Python (version 3.13, in this case).
+    * We then use `pip` to install `toymath` and `pytest`. (We don't need the
+      `-e` here, since we won't be editing the code on the runner.)
+    * Finally, we run `pytest`. If any of the tests fail, `pytest` will exit
+      with an error, which will cause the job to fail.
+
+    ::: {.callout-caution collapse="true" appearance="simple" icon="false"}
+    ##### Check your work: the complete `tests.yml`
+
+    ```yaml
+    name: Tests
+
+    on:
+      push:
+        branches: [main]
+      pull_request:
+
+    jobs:
+      test:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Check out the repository
+            uses: actions/checkout@v7
+
+          - name: Set up Python
+            uses: actions/setup-python@v7
+            with:
+              python-version: "3.13"
+
+          - name: Install toymath and pytest
+            run: |
+              python -m pip install --upgrade pip
+              pip install . pytest
+
+          - name: Run the tests
+            run: pytest
+    ```
+    :::
+
+### 6. Commit and push, then open a pull request
+
+1.  Commit the workflow:
+
+    ```bash
+    git add .github/workflows/tests.yml
+    git commit -m "add workflow to run tests"
+    ```
+
+2.  Push your branch to your fork on GitHub. Since `add-ci-tests` doesn't exist
+    on GitHub yet, we need to tell `git` to create it:
+
+    ```bash
+    git push -u origin add-ci-tests
+    ```
+
+3.  Go to your fork on GitHub (`https://github.com/YOUR_USERNAME/toymath`).
+    You should see a box saying that `add-ci-tests` had recent pushes. Click the
+    green `Compare & pull request` button.
+
+4.  This will open the "Comparing changes" page. **Look carefully at the gray
+    box at the top of the page.** You'll see that the "base repository" is
+    `SU-OSPO/toymath`. When you create a pull request from a fork, GitHub
+    assumes by default that you want to contribute your changes back to the
+    *upstream* repository you forked from. We don't want that here! We want to
+    merge the changes into the `main` branch of *your* fork. To change that:
+
+    * Click the "base repository: SU-OSPO/toymath" drop-down button and select
+      `YOUR_USERNAME/toymath`.
+    * The page will reload, and the gray box will now just show
+      `base: main` ← `compare: add-ci-tests`. Make sure that `base` is `main`
+      and `compare` is `add-ci-tests`.
+
+    ::: {.callout-warning}
+    Always double-check the base repository and branch before you create a pull
+    request from a fork. It's easy to accidentally open a pull request on
+    someone else's repository!
+    :::
+
+5.  Click the green `Create pull request` button.
+
+::: {.callout-note}
+If this is the first time you've used GitHub Actions on your fork, you might
+see a message on the Actions tab saying that workflows aren't being run on
+this forked repository. If so, click the green button saying "I understand my
+workflows, go ahead and enable them." (GitHub disables workflows on forks by
+default, since you didn't write them yourself.)
+:::
+
+### 7. Look at the results
+
+1.  Scroll to the bottom of your pull request. Just above the merge button,
+    you'll see a box that lists the *checks* on the pull request. You should
+    see a check called `Tests / test (pull_request)`: this is the `Tests`
+    workflow, `test` job, triggered by the `pull_request` event. While it's
+    running it will have a yellow dot next to it. After a minute or so it
+    should change to a green check mark, and the box will say "All checks have
+    passed."
+
+2.  Click on the `Tests / test (pull_request)` check. This will take you to
+    the page for that run of the job. You'll see each of the steps you wrote in
+    your workflow file (plus a few that GitHub adds automatically). Click on
+    the "Run the tests" step to expand it. You'll see the same output from
+    `pytest` that you saw on your computer!
+
+3.  You can also see all of your workflow runs by clicking the `Actions` tab at
+    the top of your repository's page on GitHub. Try that now. You'll see a
+    list of all your workflows on the left, and all the times they've run in
+    the middle.
+
+## IV. Breaking things
+
+Your tests pass. But how do you know that they actually test anything? Let's
+see what happens when someone makes a change that breaks the code.
+
+### 8. Introduce a bug
+
+1.  Use your favorite text editor to open `toymath/functions.py`, and change
+    the `+` in the `add` function to a `*`, so that it reads:
+
+    ```python
+    def add(a, b):
+        """Return the sum of a and b."""
+        return a * b
+    ```
+
+    Oops.
+
+2.  Let's pretend that you forgot to run the tests on your computer before
+    committing. Commit and push the change:
+
+    ```bash
+    git add -u
+    git commit -m "update add function"
+    git push
+    ```
+
+    (Since we used `-u` the first time we pushed, `git push` knows to push to
+    the `add-ci-tests` branch on your fork.)
+
+3.  Go back to your pull request on GitHub. Pushing to the `add-ci-tests`
+    branch automatically updated the pull request, which triggered the `Tests`
+    workflow again. Once it finishes, you should see a red X next to the check,
+    and the box will say "All checks have failed."
+
+4.  Click on the failed check, and expand the "Run the tests" step. You'll see
+    that `pytest` tells you exactly what went wrong:
+
+    ```bash
+    >           assert subtract(c, a) == b
+    E           assert 12 == 5
+    E            +  where 12 = subtract(15, 3)
+    ```
+
+    Our round-trip test found that `add(3, 5)` returned `15` instead of `8`.
+
+Notice that GitHub still lets you merge the pull request even though the
+tests failed. Failing checks are a big red warning sign to anyone
+reviewing the pull request, though!
+
+::: {.callout-tip}
+Many projects set up *branch protection rules* to prevent pull requests from
+being merged until all the checks pass. You can do this in your repository's
+Settings, under "Rules" (or "Branches"). See GitHub's documentation on
+[protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)
+for more details.
+:::
+
+### 9. Fix the bug
+
+1.  Open `toymath/functions.py` again and change the `*` back to a `+`.
+
+2.  This time, run the tests on your computer before committing:
+
+    ```bash
+    pytest
+    ```
+
+    They should pass. (Try running `pytest` with the `*` in place, too, if you
+    like. You'll see that you could've caught the bug before pushing it!)
+
+3.  Commit and push the fix:
+
+    ```bash
+    git add -u
+    git commit -m "fix add function"
+    git push
+    ```
+
+4.  Go back to your pull request. Once the workflow finishes running, your
+    checks should be green again.
+
+## V. Testing on multiple operating systems and Python versions
+
+Right now we only test on one operating system (Ubuntu Linux) and one version
+of Python (3.13). But people who use your package will use lots of different
+operating systems and versions of Python. Code that works on one doesn't
+always work on another. (File paths are a common culprit: Windows uses `\`
+to separate directories, whereas Linux and MacOS use `/`.)
+
+Installing a bunch of different operating systems and versions of Python on
+your own computer to test all of those combinations would be a pain. With
+GitHub Actions it's easy, thanks to the *matrix* strategy.
+
+### 10. Add a matrix to the workflow
+
+1.  Open `.github/workflows/tests.yml` and change the `jobs` section so that it
+    reads:
+
+    ```yaml
+    jobs:
+      test:
+        strategy:
+          fail-fast: false
+          matrix:
+            os: [ubuntu-latest, macos-latest, windows-latest]
+            python-version: ["3.12", "3.13", "3.14"]
+        runs-on: ${{ matrix.os }}
+        steps:
+          - name: Check out the repository
+            uses: actions/checkout@v7
+
+          - name: Set up Python ${{ matrix.python-version }}
+            uses: actions/setup-python@v7
+            with:
+              python-version: ${{ matrix.python-version }}
+
+          - name: Install toymath and pytest
+            run: |
+              python -m pip install --upgrade pip
+              pip install . pytest
+
+          - name: Run the tests
+            run: pytest
+    ```
+
+    Here's what changed:
+
+    * We added a `strategy` section with a `matrix`. The matrix defines two
+      variables, `os` and `python-version`, each with a list of values. GitHub
+      will create a separate job for *every combination* of these values. In
+      this case that's 3 operating systems × 3 Python versions = 9 jobs, all of
+      which will run at the same time.
+    * The `${{ ... }}` syntax lets us use the values of variables in the
+      workflow. We use `${{ matrix.os }}` to set the operating system the job
+      runs on, and `${{ matrix.python-version }}` to set which version of
+      Python is installed.
+    * By default, if one job in a matrix fails, GitHub cancels all the others.
+      Setting `fail-fast: false` tells GitHub to let them all finish. That way
+      we can see *all* of the combinations that fail, not just the first one.
+
+    ::: {.callout-note}
+    Why are the Python versions in quotes? Because YAML would otherwise read
+    them as numbers, and `3.10` (for example) would become `3.1`!
+    :::
+
+2.  Commit and push the change:
+
+    ```bash
+    git add -u
+    git commit -m "test on multiple operating systems and python versions"
+    git push
+    ```
+
+3.  Go back to your pull request on GitHub. You'll now see nine checks at the
+    bottom, with names like `Tests / test (macos-latest, 3.14) (pull_request)`.
+    It might take a few minutes for all of them to finish (the Windows and
+    MacOS runners are usually a bit slower to start). Click on a few of them to
+    see the output. Go to the `Actions` tab too; if you click on the latest run
+    of the `Tests` workflow you'll see all nine jobs listed on the left.
+
+### 11. Merge the pull request
+
+Assuming all of the checks pass, it's time to merge. Since we have a few
+"oops" commits on this branch (breaking and then fixing the `add` function),
+this is a good place to squash and merge (see the 9/17 lecture in the
+[git unit](../02_git/index.qmd#lectures) if you need a refresher). Squashing
+will combine all of the commits on `add-ci-tests` into a single commit on
+`main`, so those "oops" commits won't clutter up `main`'s history.
+
+1.  At the bottom of your pull request, click the drop-down arrow next to the
+    green merge button and select "Squash and merge."
+
+2.  Edit the commit message if you like, then click `Confirm squash and merge`.
+
+3.  Click the `Delete branch` button to delete `add-ci-tests` on GitHub.
+
+4.  Click on the `Actions` tab. You'll see that the `Tests` workflow is running
+    again. This is because merging the pull request pushed a new commit to
+    `main`, and we told the workflow to run on every push to `main`. That way
+    you'll know if something on `main` ever gets broken, even if it gets there
+    without a pull request.
+
+## VI. Using a workflow template
+
+Writing workflows from scratch is good for understanding how they work, but
+you don't always need to. GitHub provides a library of *workflow templates*
+for common tasks. Let's use one to add a workflow that runs
+[Pylint](https://pylint.readthedocs.io) on our code. Pylint is a *linter*: a
+program that checks your code for style problems and common mistakes (e.g.,
+missing docstrings, unused variables, poorly named variables) without running
+it.
+
+This time, we'll do everything on GitHub, without touching our local
+repository.
+
+### 12. Create a branch on GitHub
+
+1.  Go to your fork on GitHub (`https://github.com/YOUR_USERNAME/toymath`).
+    Click the drop-down button that says `main` in the upper left, then click
+    "View all branches."
+
+2.  Click the green `New branch` button. In the "New branch name" field type
+    `add-pylint`. Make sure the source is `main` (on *your* fork), then click
+    `Create new branch`.
+
+3.  **Switch to the new branch.** Go back to your fork's main page (click on
+    `<> Code` at the top), click the branch drop-down button that says `main`,
+    and select `add-pylint`. The drop-down button should now say `add-pylint`.
+    This is important! We want to add the new workflow to the `add-pylint`
+    branch, not to `main`.
+
+### 13. Add the Pylint workflow
+
+1.  Click on the `Actions` tab at the top of your repository, then click the
+    `New workflow` button on the left. This will bring you to the "Choose a
+    workflow" page, which lists templates that GitHub thinks may be relevant to
+    your repository.
+
+2.  In the search box, type `pylint`. Find the "Pylint" workflow and click its
+    `Configure` button.
+
+3.  This will open GitHub's file editor with a new file called
+    `.github/workflows/pylint.yml`. Check the top of the page: next to the file
+    name it should say you're editing on the `add-pylint` branch. You'll see
+    something like this:
+
+    ```yaml
+    name: Pylint
+
+    on: [push]
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            python-version: ["3.8", "3.9", "3.10"]
+        steps:
+        - uses: actions/checkout@v4
+        - name: Set up Python ${{ matrix.python-version }}
+          uses: actions/setup-python@v3
+          with:
+            python-version: ${{ matrix.python-version }}
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install pylint
+        - name: Analysing the code with pylint
+          run: |
+            pylint $(git ls-files '*.py')
+    ```
+
+    You should recognize most of this now! A few things to note:
+
+    * This workflow runs on every push to *any* branch (`on: [push]`).
+    * The last step uses `git ls-files '*.py'` to get a list of all the Python
+      files in the repository, then runs `pylint` on them.
+    * The template is a bit out of date: it uses older versions of the
+      `checkout` and `setup-python` actions, and versions of Python that have
+      reached their [end of life](https://devguide.python.org/versions/).
+      Templates are a starting point; you'll often need to tweak them.
+
+4.  Let's update the template. In the editor, change:
+
+    * the `python-version` list to `["3.12", "3.13", "3.14"]`,
+    * `actions/checkout@v4` to `actions/checkout@v7`, and
+    * `actions/setup-python@v3` to `actions/setup-python@v7`.
+
+5.  Click the green `Commit changes...` button in the upper right. Leave the
+    default commit message, and make sure "Commit directly to the `add-pylint`
+    branch" is selected. Then click `Commit changes`.
+
+    ::: {.callout-warning}
+    If the commit dialog says "Commit directly to the **`main`** branch"
+    instead, you did not switch to the `add-pylint` branch before clicking
+    on the `Actions` tab. Don't commit to `main`! Instead, select "Create a new
+    branch for this commit and start a pull request," name the new branch
+    `add-pylint-workflow`, and use that branch for the rest of this section.
+    (You can delete the empty `add-pylint` branch afterward.)
+    :::
+
+6.  Click on the `Actions` tab. You'll see that `Pylint` is now listed as one of
+    your workflows on the left, and that it's already running. That's because
+    committing the file pushed a new commit to the `add-pylint` branch, and the
+    workflow runs on every push.
+
+### 14. Open a pull request and merge
+
+1.  Go back to your fork's main page. You should see a box saying that
+    `add-pylint` had recent pushes; click the `Compare & pull request` button.
+    (If you don't see the box, click the `Pull requests` tab, then the green
+    `New pull request` button, and select `add-pylint` as the `compare` branch.)
+
+2.  **Again, change the base repository to `YOUR_USERNAME/toymath`**, so that
+    you're merging `add-pylint` into the `main` branch of *your* fork, not
+    the upstream repository. Then click `Create pull request`.
+
+3.  Scroll to the bottom of the pull request. In addition to the nine `Tests`
+    checks, you'll see three new `Pylint` checks, one for each version of
+    Python. (Notice that these end with `(push)` rather than `(pull_request)`,
+    since that's the event that triggered them.) Click on one of them and
+    expand the "Analysing the code with pylint" step. If all goes well, you
+    should see:
+
+    ```bash
+    --------------------------------------------------------------------
+    Your code has been rated at 10.00/10
+    ```
+
+    If Pylint finds *anything* to complain about, it will exit with an error,
+    and the check will fail.
+
+4.  Once you're happy with it, merge the pull request (a normal merge is fine
+    here, since there's only one commit), then delete the `add-pylint` branch.
+
+## VII. Wrapping up
+
+Your fork's `main` branch on GitHub now has two new commits that your local
+repository doesn't know about. Let's sync them.
+
+1.  In your terminal, switch back to `main` and pull the changes:
+
+    ```bash
+    git checkout main
+    git pull
+    ```
+
+    Run `ls .github/workflows`. You should see both `tests.yml` and
+    `pylint.yml`.
+
+2.  Delete your local copy of the `add-ci-tests` branch:
+
+    ```bash
+    git branch -D add-ci-tests
+    ```
+
+    Note that we had to use a capital `-D` here. That's because we squashed
+    the commits on `add-ci-tests` when we merged, so `git` doesn't see the
+    individual commits on that branch in `main`. It'll warn you that the
+    branch isn't fully merged if you use `-d`. The capital `-D` forces the
+    deletion.
+
+Congratulations! Your repository now automatically runs its tests on three
+operating systems and three versions of Python, and checks the code with a
+linter, every time someone opens a pull request. In the [next
+tutorial](tutorial2.qmd) we'll use GitHub Actions to build and publish
+documentation for `toymath`.

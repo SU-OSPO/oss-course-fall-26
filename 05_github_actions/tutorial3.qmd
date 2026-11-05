@@ -1,0 +1,372 @@
+---
+title: "3. Challenge: deploying a Hugo website to GitHub Pages"
+order: 3
+---
+
+In this tutorial you'll put together what you learned in Parts
+[1](tutorial1.qmd) and [2](tutorial2.qmd). You'll create a new repository with
+a (very) simple website built with [Hugo](https://gohugo.io), then write a
+GitHub Actions workflow *on your own* that publishes the website to GitHub
+Pages every time you push a change.
+
+Hugo is a *static site generator*: it takes content that you write in
+Markdown files, combines it with *templates* that describe how the pages
+should look, and produces a website made up of plain HTML files. It's a
+popular tool for building personal websites, blogs, and project pages. (This
+course website is built with a different static site generator called
+[Quarto](https://quarto.org), but the idea is the same.)
+
+## I. Create the website
+
+### 1. Create a repository on GitHub
+
+1.  Go to https://github.com/new to create a new repository.
+
+2.  Under "Owner," select yourself. Under "Repository name," type
+    `my-hugo-site`.
+
+3.  Make sure "Public" is selected, and turn on "Add README."
+
+4.  Click the green `Create repository` button.
+
+5.  Clone the repository to your computer, and `cd` into it. (See
+    [Part 2](../02_git/cli/exercise2.qmd#ii.-clone-the-repository-to-your-local-computer)
+    of the git tutorials if you need a refresher.)
+
+### 2. Install Hugo
+
+The easiest way to install Hugo on any operating system is with conda. Create
+a new environment for it:
+
+```bash
+conda create -n hugo -c conda-forge hugo
+conda activate hugo
+```
+
+Check that it worked by running:
+
+```bash
+hugo version
+```
+
+You should see something like `hugo v0.169.0...`.
+
+### 3. Create the site
+
+1.  From the top level of your `my-hugo-site` repository, run:
+
+    ```bash
+    hugo new site . --force
+    ```
+
+    This tells Hugo to create a new site in the current directory (`.`).
+    Normally Hugo will refuse to create a site in a directory that already has
+    files in it; the `--force` tells it to do it anyway (we already have a
+    `README.md` here).
+
+2.  Run `ls`. You'll see that Hugo created a bunch of directories, along with a
+    file called `hugo.toml`. We only need to worry about a few of them:
+
+    * `hugo.toml`: Hugo's configuration file for the site.
+    * `content`: This is where the content of the website goes, written in
+      Markdown.
+    * `layouts`: This is where the templates go that tell Hugo how to turn
+      the content into HTML.
+
+    Most Hugo sites use a *theme* that provides the layouts for you. We'll
+    write our own (very simple) layout instead, so that you can see how
+    the pieces fit together.
+
+3.  Open `hugo.toml` in your favorite text editor. It will look like:
+
+    ```toml
+    baseURL = 'https://example.org/'
+    locale = 'en-us'
+    title = 'My New Hugo Project'
+    ```
+
+    Change the `title` to something you like (e.g., `'My Website'`), and add the
+    following line to the end of the file:
+
+    ```toml
+    disableKinds = ['taxonomy', 'term']
+    ```
+
+    By default, Hugo creates extra pages for organizing blog posts by tags and
+    categories (which it calls "taxonomies"). We don't need those for a
+    single-page site, and adding this line stops Hugo from warning us that we
+    don't have layouts for them. Don't worry about the `baseURL` for now;
+    we'll come back to it later.
+
+4.  Now create the layout. Use your favorite text editor to create a file
+    called `layouts/home.html` with the following in it:
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>{{ .Site.Title }}</title>
+    </head>
+    <body>
+      <h1>{{ .Title }}</h1>
+      {{ .Content }}
+    </body>
+    </html>
+    ```
+
+    This is an ordinary HTML file, with a few placeholders in `{{ }}`. When
+    Hugo builds the site, it will replace `{{ .Site.Title }}` with the title
+    you set in `hugo.toml`, `{{ .Title }}` with the title of the page, and
+    `{{ .Content }}` with the content of the page, converted from Markdown to
+    HTML. The name `home.html` tells Hugo to use this layout for the home page
+    of the site.
+
+5.  Finally, create the content for the home page. Create a file called
+    `content/_index.md` and put the following in it:
+
+    ```markdown
+    ---
+    title: "Welcome to my website!"
+    ---
+
+    This website was built with [Hugo](https://gohugo.io/).
+
+    Here are some things I like:
+
+    - Open source software
+    - GitHub Actions
+    - **Coffee**
+    ```
+
+    The part between the `---` lines at the top is called *front matter*.
+    It's where you put information about the page, like its title. (You may
+    have noticed that the `.qmd` files for this course website have front
+    matter, too.) Everything after that is ordinary Markdown. Feel free to
+    change the text and list to whatever you like!
+
+### 4. Build the site on your computer
+
+1.  From the top level of your repository, run:
+
+    ```bash
+    hugo
+    ```
+
+    This builds the site. Hugo will print a table summarizing the pages it
+    built. It puts the resulting website in a directory called `public`.
+
+2.  Run `ls public`. You'll see an `index.html` file (along with a couple of
+    other files Hugo makes by default). Open `public/index.html` in a text
+    editor and take a look. You'll see that Hugo took your layout and filled
+    in the placeholders, converting the Markdown in `content/_index.md` into
+    HTML (e.g., `**Coffee**` became `<strong>Coffee</strong>`).
+
+3.  Now open `public/index.html` in your web browser (by double-clicking on it,
+    or using `open` on Mac, `start` on Windows, or `xdg-open` on Linux, as in
+    [Part 2](tutorial2.qmd#build-the-documentation-on-your-computer)). You
+    should see your website!
+
+::: {.callout-tip}
+While you're working on a Hugo site, you can also run:
+
+```bash
+hugo server
+```
+
+This builds the site and starts a small web server on your computer. Go to
+http://localhost:1313/ in your browser to see the site. While the server is
+running, Hugo will rebuild the site and refresh your browser every time you
+save a change to one of the files. Hit `<Ctrl>+C` in the terminal to stop the
+server.
+:::
+
+### 5. Commit and push
+
+1.  As with the Sphinx documentation in Part 2, we don't want to commit the
+    generated website. Create a file called `.gitignore` at the top level of
+    your repository with the following in it:
+
+    ```bash
+    public/
+    resources/
+    .hugo_build.lock
+    ```
+
+    (`resources` and `.hugo_build.lock` are other files that Hugo creates while
+    building the site.)
+
+2.  Run `git status` to check that `public` is not listed, then commit
+    everything and push:
+
+    ```bash
+    git add .
+    git commit -m "create hugo site"
+    git push
+    ```
+
+    Since this is your own repository and you're the only one working on it,
+    we're just committing directly to `main` here.
+
+    ::: {.callout-note}
+    Hugo creates a few empty directories (like `assets` and `static`). `git`
+    doesn't track empty directories, so you won't see these on GitHub. That's
+    fine; Hugo doesn't need them.
+    :::
+
+## II. Deploy the site with GitHub Actions
+
+:::: {.callout-caution appearance="simple" icon="false"}
+#### Challenge
+
+Write a GitHub Actions workflow that builds your Hugo site and deploys it to
+GitHub Pages every time you push to `main`. When you're done, your website
+should be at `https://YOUR_USERNAME.github.io/my-hugo-site/`.
+
+Use the `docs.yml` workflow you wrote in [Part 2](tutorial2.qmd) as a
+starting point. Some hints:
+
+-   Don't forget to set your repository's GitHub Pages "Source" to
+    `GitHub Actions` (see
+    [Part 2, step 6](tutorial2.qmd#turn-on-github-pages)).
+-   Since every push to `main` should deploy the site, you don't need the `if`
+    condition on the `deploy` job, or the `pull_request` trigger.
+-   You'll need to install Hugo on the runner. You *could* install conda on
+    the runner and then use it to install Hugo, but it's easier to use an
+    action someone has already written. Search the
+    [GitHub Marketplace](https://github.com/marketplace?type=actions) for
+    "hugo". The `peaceiris/actions-hugo` action is a popular choice.
+-   Remember that Hugo puts the website it builds in `public`.
+-   Remember the `baseURL` in `hugo.toml`? Hugo uses it to create links
+    between pages. Our one-page site will work without changing it, but it's
+    good practice to set it correctly. You can override it when you build by
+    running `hugo --baseURL URL`. The
+    [`actions/configure-pages`](https://github.com/actions/configure-pages)
+    action outputs the URL of your GitHub Pages site as `base_url`, which you
+    can use in a later step with `${{ steps.STEP_ID.outputs.base_url }}`
+    (where `STEP_ID` is the `id` you give the `configure-pages` step).
+    *(This one's optional.)*
+
+Once you've written your workflow, commit it and push it to GitHub, then check
+the `Actions` tab to see if it worked. If it didn't, click on the failed job
+to see what went wrong, fix it, and push again. That's how everyone writes
+workflows!
+
+::: {.callout-caution collapse="true" appearance="simple" icon="false"}
+##### Solution
+
+1.  Turn on GitHub Pages: go to your repository on GitHub, click `Settings`,
+    then `Pages`, and under "Build and deployment" set "Source" to
+    `GitHub Actions`.
+
+2.  Create a file called `.github/workflows/deploy.yml` with the following in it:
+
+    ```yaml
+    name: Deploy website
+
+    on:
+      push:
+        branches: [main]
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Check out the repository
+            uses: actions/checkout@v7
+
+          - name: Install Hugo
+            uses: peaceiris/actions-hugo@v3
+            with:
+              hugo-version: "0.169.0"
+
+          - name: Get the GitHub Pages URL
+            id: pages
+            uses: actions/configure-pages@v6
+
+          - name: Build the website
+            run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+
+          - name: Upload the website
+            uses: actions/upload-pages-artifact@v5
+            with:
+              path: public
+
+      deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        permissions:
+          pages: write
+          id-token: write
+        environment:
+          name: github-pages
+          url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+          - name: Deploy to GitHub Pages
+            id: deployment
+            uses: actions/deploy-pages@v5
+    ```
+
+    The differences from Part 2's `docs.yml` are:
+
+    * The workflow only runs on pushes to `main`, so there's no `if` on the
+      `deploy` job.
+    * Instead of setting up Python and installing Sphinx, we use
+      `peaceiris/actions-hugo` to install Hugo. We set `hugo-version` to the
+      same version of Hugo that we used on our own computer, so that the
+      site is built the same way in both places.
+    * We use `actions/configure-pages` to get the URL of our GitHub Pages
+      site, then pass it to `hugo` with `--baseURL`. (The `--minify` option
+      tells Hugo to remove unnecessary whitespace from the HTML files to make
+      them smaller. It's optional.)
+    * We upload `public` instead of `docs/_build/html`.
+
+3.  Commit and push:
+
+    ```bash
+    git add .github/workflows/deploy.yml
+    git commit -m "add workflow to deploy website"
+    git push
+    ```
+
+4.  Go to the `Actions` tab on GitHub and click on the running workflow. Once
+    the `deploy` job finishes, click on the link under it to see your website.
+:::
+::::
+
+## III. Update the website
+
+### 6. Make a change
+
+Now that your workflow is set up, updating your website is as easy as pushing
+a change.
+
+1.  Open `content/_index.md` and change something. For example, add another
+    item to your list, or add a new paragraph at the end.
+
+2.  If you like, preview the change on your computer by running `hugo server`
+    (or by running `hugo` and opening `public/index.html`).
+
+3.  Commit and push the change:
+
+    ```bash
+    git add -u
+    git commit -m "update home page"
+    git push
+    ```
+
+4.  Go to the `Actions` tab on GitHub. You'll see that your workflow started
+    running as soon as you pushed. Once it's done, go to
+    `https://YOUR_USERNAME.github.io/my-hugo-site/` and refresh the page. You
+    should see your change!
+
+    ::: {.callout-note}
+    If you don't see the change right away, wait a minute and try again. Your
+    web browser may also be showing you an old copy of the page that it saved
+    earlier. If so, do a "hard refresh" by holding down `Shift` while clicking
+    your browser's refresh button.
+    :::
+
+Congratulations! You've written a workflow from scratch that automatically
+publishes a website. You never need to build the site yourself again: just
+write Markdown, commit, and push, and GitHub will take care of the rest.
