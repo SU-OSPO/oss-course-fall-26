@@ -609,143 +609,29 @@ will combine all of the commits on `add-ci-tests` into a single commit on
     you'll know if something on `main` ever gets broken, even if it gets there
     without a pull request.
 
-## VI. Using a workflow template
+::: {.callout-note}
+## Workflow templates
 
 Writing workflows from scratch is good for understanding how they work, but
 you don't always need to. GitHub provides a library of *workflow templates*
-for common tasks. Let's use one to add a workflow that runs
-[Pylint](https://pylint.readthedocs.io) on our code. Pylint is a *linter*: a
-program that checks your code for style problems and common mistakes (e.g.,
-missing docstrings, unused variables, poorly named variables) without running
-it.
+for common tasks, such as running tests for many different languages,
+checking code with a linter, building and publishing packages, and deploying
+websites. To see them, click the `Actions` tab of your repository, then click
+the `New workflow` button. GitHub will suggest templates that it thinks are
+relevant to your repository, and you can search for others. Clicking
+`Configure` on a template opens it in GitHub's file editor so that you can
+modify it before committing it.
 
-This time, we'll do everything on GitHub, without touching our local
-repository.
+Templates are a good starting point, but they're not always up to date (they
+may use older versions of actions or of Python, for example). Now that you
+know what the parts of a workflow file do, you'll be able to read a template
+and tweak it to fit your project.
+:::
 
-### 12. Create a branch on GitHub
+## VI. Wrapping up
 
-1.  Go to your fork on GitHub (`https://github.com/YOUR_USERNAME/toymath`).
-    Click the drop-down button that says `main` in the upper left, then click
-    "View all branches."
-
-2.  Click the green `New branch` button. In the "New branch name" field type
-    `add-pylint`. Make sure the source is `main` (on *your* fork), then click
-    `Create new branch`.
-
-3.  **Switch to the new branch.** Go back to your fork's main page (click on
-    `<> Code` at the top), click the branch drop-down button that says `main`,
-    and select `add-pylint`. The drop-down button should now say `add-pylint`.
-    This is important! We want to add the new workflow to the `add-pylint`
-    branch, not to `main`.
-
-### 13. Add the Pylint workflow
-
-1.  Click on the `Actions` tab at the top of your repository, then click the
-    `New workflow` button on the left. This will bring you to the "Choose a
-    workflow" page, which lists templates that GitHub thinks may be relevant to
-    your repository.
-
-2.  In the search box, type `pylint`. Find the "Pylint" workflow and click its
-    `Configure` button.
-
-3.  This will open GitHub's file editor with a new file called
-    `.github/workflows/pylint.yml`. Check the top of the page: next to the file
-    name it should say you're editing on the `add-pylint` branch. You'll see
-    something like this:
-
-    ```yaml
-    name: Pylint
-
-    on: [push]
-
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        strategy:
-          matrix:
-            python-version: ["3.8", "3.9", "3.10"]
-        steps:
-        - uses: actions/checkout@v4
-        - name: Set up Python ${{ matrix.python-version }}
-          uses: actions/setup-python@v3
-          with:
-            python-version: ${{ matrix.python-version }}
-        - name: Install dependencies
-          run: |
-            python -m pip install --upgrade pip
-            pip install pylint
-        - name: Analysing the code with pylint
-          run: |
-            pylint $(git ls-files '*.py')
-    ```
-
-    You should recognize most of this now! A few things to note:
-
-    * This workflow runs on every push to *any* branch (`on: [push]`).
-    * The last step uses `git ls-files '*.py'` to get a list of all the Python
-      files in the repository, then runs `pylint` on them.
-    * The template is a bit out of date: it uses older versions of the
-      `checkout` and `setup-python` actions, and versions of Python that have
-      reached their [end of life](https://devguide.python.org/versions/).
-      Templates are a starting point; you'll often need to tweak them.
-
-4.  Let's update the template. In the editor, change:
-
-    * the `python-version` list to `["3.12", "3.13", "3.14"]`,
-    * `actions/checkout@v4` to `actions/checkout@v7`, and
-    * `actions/setup-python@v3` to `actions/setup-python@v7`.
-
-5.  Click the green `Commit changes...` button in the upper right. Leave the
-    default commit message, and make sure "Commit directly to the `add-pylint`
-    branch" is selected. Then click `Commit changes`.
-
-    ::: {.callout-warning}
-    If the commit dialog says "Commit directly to the **`main`** branch"
-    instead, you did not switch to the `add-pylint` branch before clicking
-    on the `Actions` tab. Don't commit to `main`! Instead, select "Create a new
-    branch for this commit and start a pull request," name the new branch
-    `add-pylint-workflow`, and use that branch for the rest of this section.
-    (You can delete the empty `add-pylint` branch afterward.)
-    :::
-
-6.  Click on the `Actions` tab. You'll see that `Pylint` is now listed as one of
-    your workflows on the left, and that it's already running. That's because
-    committing the file pushed a new commit to the `add-pylint` branch, and the
-    workflow runs on every push.
-
-### 14. Open a pull request and merge
-
-1.  Go back to your fork's main page. You should see a box saying that
-    `add-pylint` had recent pushes; click the `Compare & pull request` button.
-    (If you don't see the box, click the `Pull requests` tab, then the green
-    `New pull request` button, and select `add-pylint` as the `compare` branch.)
-
-2.  **Again, change the base repository to `YOUR_USERNAME/toymath`**, so that
-    you're merging `add-pylint` into the `main` branch of *your* fork, not
-    the upstream repository. Then click `Create pull request`.
-
-3.  Scroll to the bottom of the pull request. In addition to the nine `Tests`
-    checks, you'll see three new `Pylint` checks, one for each version of
-    Python. (Notice that these end with `(push)` rather than `(pull_request)`,
-    since that's the event that triggered them.) Click on one of them and
-    expand the "Analysing the code with pylint" step. If all goes well, you
-    should see:
-
-    ```bash
-    --------------------------------------------------------------------
-    Your code has been rated at 10.00/10
-    ```
-
-    If Pylint finds *anything* to complain about, it will exit with an error,
-    and the check will fail.
-
-4.  Once you're happy with it, merge the pull request (a normal merge is fine
-    here, since there's only one commit), then delete the `add-pylint` branch.
-
-## VII. Wrapping up
-
-Your fork's `main` branch on GitHub now has two new commits that your local
-repository doesn't know about. Let's sync them.
+Your fork's `main` branch on GitHub now has a new commit that your local
+repository doesn't know about. Let's sync it.
 
 1.  In your terminal, switch back to `main` and pull the changes:
 
@@ -754,8 +640,7 @@ repository doesn't know about. Let's sync them.
     git pull
     ```
 
-    Run `ls .github/workflows`. You should see both `tests.yml` and
-    `pylint.yml`.
+    Run `ls .github/workflows`. You should see `tests.yml`.
 
 2.  Delete your local copy of the `add-ci-tests` branch:
 
@@ -770,7 +655,6 @@ repository doesn't know about. Let's sync them.
     deletion.
 
 Congratulations! Your repository now automatically runs its tests on three
-operating systems and three versions of Python, and checks the code with a
-linter, every time someone opens a pull request. In the [next
-tutorial](tutorial2.qmd) we'll use GitHub Actions to build and publish
-documentation for `toymath`.
+operating systems and three versions of Python every time someone opens a
+pull request. In the [next tutorial](tutorial2.qmd) we'll use GitHub Actions
+to build and publish documentation for `toymath`.

@@ -11,8 +11,8 @@ merged into `main`, the website will update itself. This is an example of
 *continuous deployment*.
 
 This tutorial picks up where [Part 1](tutorial1.qmd) left off. You should
-have your fork of `toymath` cloned to your computer, with the `tests.yml` and
-`pylint.yml` workflows merged into `main`.
+have your fork of `toymath` cloned to your computer, with the `tests.yml`
+workflow merged into `main`.
 
 ## I. Create the documentation
 
@@ -306,73 +306,9 @@ There's a lot here. Let's go through it.
     they finish, `Docs / build` should pass, and `Docs / deploy` should say
     "Skipped," since this is a pull request, not a push to `main`.
 
-## III. Fixing a failed check
+## III. Merge and see the result
 
-### 9. Pylint is unhappy
-
-You'll also see the `Pylint` checks. Unlike the others, they should have
-failed! Click on one of them and expand the "Analysing the code with pylint"
-step. You'll see something like:
-
-```bash
-************* Module conf
-docs/conf.py:1:0: C0114: Missing module docstring (missing-module-docstring)
-docs/conf.py:10:0: W0622: Redefining built-in 'copyright' (redefined-builtin)
-docs/conf.py:9:0: C0103: Constant name "project" doesn't conform to UPPER_CASE naming style (invalid-name)
-...
-Your code has been rated at 6.50/10
-```
-
-What happened? Our Pylint workflow runs on every Python file in the
-repository, and `docs/conf.py` is a Python file. The `conf.py` that
-`sphinx-quickstart` created doesn't follow all of Pylint's style rules. Pylint
-doesn't like that it doesn't have a docstring; that it uses lowercase names for
-variables defined at the top of a module (Pylint thinks these should be
-`UPPER_CASE`, since they look like constants); and that it defines a variable
-called `copyright`, which is the name of a built-in Python function.
-
-This is exactly what CI is for: catching problems that you didn't notice on
-your own computer. In this case the "problems" are with style, not
-correctness, and Sphinx requires the variables in `conf.py` to have the names
-they do. So rather than renaming the variables, we'll tell Pylint to skip
-those particular checks for this file.
-
-1.  Open `docs/conf.py` in your favorite text editor and add the following
-    two lines to the very top of the file:
-
-    ```python
-    """Configuration file for the Sphinx documentation builder."""
-    # pylint: disable=invalid-name,redefined-builtin
-    ```
-
-    The first line adds a module docstring. The second is a special comment
-    that tells Pylint to ignore the `invalid-name` and `redefined-builtin`
-    checks for this file.
-
-2.  If you'd like to check this on your computer before pushing, install
-    Pylint and run it the same way the workflow does:
-
-    ```bash
-    pip install pylint
-    pylint $(git ls-files '*.py')
-    ```
-
-    You should get a rating of 10.00/10.
-
-3.  Commit and push the fix:
-
-    ```bash
-    git add -u
-    git commit -m "fix pylint errors in docs/conf.py"
-    git push
-    ```
-
-4.  Go back to your pull request and wait for the checks to finish. This time
-    they should all pass (with `Docs / deploy` skipped).
-
-## IV. Merge and see the result
-
-### 10. Merge the pull request
+### 9. Merge the pull request
 
 1.  Merge the pull request (either a normal merge or a squash and merge is fine
     here), then delete the `add-docs` branch on GitHub.
@@ -396,7 +332,7 @@ gear icon next to "About" on the right, check the box that says "Use your
 GitHub Pages website," then click `Save changes`.
 :::
 
-### 11. Sync your local repository
+### 10. Sync your local repository
 
 Finally, update your local repository so that it has the merged changes:
 
