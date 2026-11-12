@@ -348,12 +348,202 @@ your website will update itself automatically. Try it out: make a change to
 your website change.
 
 ::: {.callout-note}
-The documentation we created here is very minimal. Real projects use Sphinx
-extensions like
-[autodoc](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html)
-to generate documentation for every function in the package automatically
-from their docstrings, and add pages with installation instructions,
-tutorials, and examples. We talked about these in the [packaging and
-deployment lecture](../04_packaging_deployment/index.qmd). Since the workflow
-just runs `sphinx-build`, all of that would be published to your website too.
+The documentation we created here is very minimal. Real projects add pages
+with installation instructions, tutorials, and examples, and generate
+documentation for every function in the package automatically from their
+docstrings. We talked about these in the [packaging and deployment
+lecture](../04_packaging_deployment/index.qmd). Since the workflow just runs
+`sphinx-build`, all of that would be published to your website too. The bonus
+section below shows you how to set up the automatic function documentation.
 :::
+
+## Bonus: Automatically document every function
+
+Every function in `toymath` already has a docstring that says what it does.
+Rather than copying those descriptions into our documentation by hand (and
+then having to remember to update them every time the code changes), we can
+have Sphinx read them straight from the code. This is done with a Sphinx
+extension called
+[autodoc](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html),
+which comes with Sphinx.
+
+### 11. Turn on autodoc
+
+1.  Make sure you're on an up-to-date `main` branch (see Step 10), then create
+    a new branch:
+
+    ```bash
+    git checkout -b add-api-docs
+    ```
+
+2.  Open `docs/conf.py` in your favorite text editor and find the line that
+    says:
+
+    ```python
+    extensions = []
+    ```
+
+    Change it to:
+
+    ```python
+    extensions = ['sphinx.ext.autodoc']
+    ```
+
+    Sphinx extensions are add-ons that give Sphinx new abilities. You turn
+    them on by adding their names to the `extensions` list.
+
+### 12. Add an API reference page
+
+The documentation for the functions, classes, etc. that a package provides is
+called its *API reference* (API stands for "application programming
+interface"). Let's put ours on its own page.
+
+1.  Create a new file called `docs/api.rst` and put the following in it:
+
+    ```rst
+    API reference
+    =============
+
+    .. automodule:: toymath
+       :members:
+    ```
+
+    The `automodule` *directive* (directives are commands in reStructuredText
+    that start with `..`) is provided by autodoc. It tells Sphinx to import
+    the `toymath` module and insert its docstring into the page. The
+    `:members:` option tells it to also document everything in the module.
+
+    How does autodoc know what "everything" is? Recall that
+    `toymath/__init__.py` has an `__all__` list. That list tells Python (and
+    autodoc) which names make up the package's public interface. Since
+    autodoc uses it to decide what to document, any time a new function is
+    added to `__all__`, it will automatically show up in the documentation.
+    You don't need to touch `api.rst` again.
+
+2.  Sphinx won't link to the new page unless we tell it to. Open
+    `docs/index.rst` and find the `toctree` directive at the bottom (the "table
+    of contents tree"). Add `api` to it, so that it reads:
+
+    ```rst
+    .. toctree::
+       :maxdepth: 2
+       :caption: Contents:
+
+       api
+    ```
+
+    Be careful with the formatting: there must be a blank line between
+    `:caption: Contents:` and `api`, and `api` must be indented by the same
+    amount as the lines above it. Note that you list the file name *without*
+    the `.rst` extension.
+
+### 13. Build and check the API reference
+
+1.  Re-build the documentation, as you did in Step 4:
+
+    ```bash
+    sphinx-build -M html docs docs/_build
+    ```
+
+2.  Open `docs/_build/html/index.html` in your browser again (or refresh the
+    page if you still have it open). You should now see an "API reference"
+    link under "Contents." Click on it. You should see every function listed
+    in `__all__` (e.g., `toymath.add` and `toymath.subtract`, plus
+    `toymath.divide` and `toymath.multiply` if you merged your partner's
+    contribution in Part 1), each with its arguments and docstring.
+
+3.  Try changing one of the docstrings in `toymath/functions.py`, then re-run
+    `sphinx-build` and refresh your browser. The API reference will update to
+    match. Change the docstring back when you're done.
+
+::: {.callout-note}
+The docstrings in `toymath` are just one line long. Docstrings in real
+projects usually also describe each argument and what the function returns,
+following a standard format like the [NumPy
+style](https://numpydoc.readthedocs.io/en/latest/format.html). Sphinx can
+format these nicely if you add the
+[napoleon](https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html)
+extension (`'sphinx.ext.napoleon'`) to the `extensions` list in `conf.py`.
+:::
+
+### 14. Update the workflow
+
+There's a catch. To read the docstrings, autodoc has to *import* `toymath`.
+That worked on your computer because you installed `toymath` into your
+`toymath` environment back in Part 1. But our workflow only installs Sphinx,
+so when it runs on GitHub, `import toymath` will fail.
+
+Worse, an import failure isn't an error as far as Sphinx is concerned. It
+prints a warning that looks like:
+
+```bash
+WARNING: autodoc: failed to import 'toymath'; the following exception was raised:
+...
+ModuleNotFoundError: No module named 'toymath'
+build succeeded, 1 warning.
+```
+
+and then carries on. The `build` job would pass and the website would be
+deployed with an empty API reference page. No one would notice unless they
+happened to read the build log!
+
+Let's fix both problems. Open `.github/workflows/docs.yml` and change the
+`Install Sphinx` and `Build the documentation` steps so that they read:
+
+```yaml
+      - name: Install toymath and Sphinx
+        run: |
+          python -m pip install --upgrade pip
+          pip install ".[docs]"
+
+      - name: Build the documentation
+        run: sphinx-build -M html docs docs/_build -W
+```
+
+-   `pip install ".[docs]"` installs `toymath` along with everything listed
+    under `docs` in `pyproject.toml` (which is just `sphinx`). We don't need
+    the `-e` flag here, since we won't be editing the code on GitHub's
+    computer.
+-   The `-W` flag tells Sphinx to treat warnings as errors. Now if anything
+    goes wrong (for example, autodoc can't import the package, or someone
+    misspells a file name in the `toctree`), the build will fail, and the
+    `Docs / build` check on the pull request will turn red. (With
+    `sphinx-build -M`, any extra flags like `-W` have to go at the end of the
+    command.)
+
+::: {.callout-tip}
+You can add `-W` when you build the documentation on your computer, too. That
+way you'll catch problems before you push.
+:::
+
+### 15. Commit, push, and merge
+
+1.  Commit your changes and push the branch to your fork:
+
+    ```bash
+    git add docs/conf.py docs/api.rst docs/index.rst .github/workflows/docs.yml
+    git commit -m "add API reference using autodoc"
+    git push -u origin add-api-docs
+    ```
+
+2.  Open a pull request on GitHub. **Remember to change the base repository to
+    `YOUR_USERNAME/toymath`.** Wait for the checks to finish, and make sure
+    `Docs / build` passes.
+
+3.  Merge the pull request and delete the branch on GitHub. Watch the `Docs`
+    workflow run on the `Actions` tab. Once the `deploy` job finishes, go to
+    `https://YOUR_USERNAME.github.io/toymath/` and click on "API reference."
+    You should see the same page you built on your computer.
+
+4.  Sync your local repository:
+
+    ```bash
+    git checkout main
+    git pull
+    git branch -D add-api-docs
+    ```
+
+From now on, your website's API reference will stay up to date with the code
+on its own. Anyone who adds a function to `toymath` (and to `__all__`) with a
+docstring will see it appear on the website as soon as their pull request is
+merged.
