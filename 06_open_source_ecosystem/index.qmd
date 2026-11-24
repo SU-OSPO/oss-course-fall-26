@@ -1,0 +1,20 @@
+---
+title: "6. Building an Open Source Ecosystem"
+toc: true
+order: 6
+---
+
+## Slides
+
+[download PDF](open_source_ecosystem.pdf)
+
+<object data="open_source_ecosystem.pdf" type="application/pdf" width="100%" height="600" style="border: 1px solid #ccc;">
+Your browser cannot display PDFs inline. <a href="open_source_ecosystem.pdf">Download the slides</a> instead.
+</object>
+
+## Lecture - 11/19/26
+
+
+Building and sustaining an open-source ecosystem: what is open source; licensing; best practices for sustaining a package; the future of open source in the age of AI.
+
+<iframe id="kmsembed-1_yyuy6hfs" width="640" height="360" src="https://video.syr.edu/embed/secure/iframe/entryId/1_yyuy6hfs/uiConfId/45992161/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="IST 400/600 Lecture 11-19-26"></iframe>
