@@ -9,7 +9,7 @@ order: 4
 [download PDF](SoftwarePackaging.pdf)
 
 <object data="SoftwarePackaging.pdf" type="application/pdf" width="100%" height="600" style="border: 1px solid #ccc;">
-Your browser cannot display PDFs inline. <a href="EffectiveAI.pdf">Download the slides</a> instead.
+Your browser cannot display PDFs inline. <a href="SoftwarePackaging.pdf">Download the slides</a> instead.
 </object>
 
 ## Lecture - 10/15/26
