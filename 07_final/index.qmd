@@ -1,0 +1,75 @@
+---
+title: "Final Evaluation, Presentations, and Papers"
+toc: true
+order: 7
+---
+
+## Final work
+
+Please email me your GitHub repos with your work by 12/10. Your project evaluation (24 points) will be based on this and feedback from your project mentor.
+See the [Project Evaluation](../syllabus.qmd#project-evaluation) in the Syllabus for the criteria you will be evaluated on.
+
+## Final presentation (IST 400 and 600)
+
+**Date: 12/3**
+
+**Points:** 12
+
+Presentations will be 10 minutes + 3 minutes for questions. Your presentation should:
+
+- Provide an overview of the project and what the goals were.
+
+- Explain any obstacles you encountered.
+
+- Explain what you accomplished.
+
+- Demonstrate use of some of the concepts we touched on in class, such as proper use of GitHub.
+
+### Examples
+
+Students gave similar presentations about their OSPO internships in Spring 2026. You can find videos of their presentations along with their slides here: https://opensource.syracuse.edu/events/25-26-internship-presentations/.
+
+### Tips
+
+- 10 minutes goes by fast! Aim to have no more than 6 or 7 slides. Any more than that and you'll find that you'll be rushing to get through them.
+
+- Practice your talk ahead of time! Even just one walk-through can make your presentations go much smoother, and give you an idea of how long your talk will actually take. More often than not, you'll find that you have too much material.
+
+- Send your slides to your mentor ahead of time so they can give you feedback.
+
+
+## Final papers (IST 600 only)
+
+**Due: 12/10**
+
+**Points:** 12
+
+Papers should be short, JOSS-like articles that describe your project. Requirements:
+
+- Length: the paper should be between 700 and 1800 words.
+
+- It must have the following sections:
+
+  * **Summary**: a description of the work for a non-specialist audience.
+
+  * **Statement of need**: what problem does the software solve?
+
+  * **State of the field**: compare to any existing software. If your project involved adding features to an existing software project, you can limit this to a statement about what the state of the software was before the start of your project.
+
+  * **Software design**: explain what you did and your software architecture. Also mention any challenges you had, and how you addressed them.
+
+    * Tip: This is a good place for a figure. Making a diagram can make it much easier to explain the software layout than trying to explain it in words. Make sure to include a caption for your figure and reference it in your main text.
+
+  * **Research impact statement**: what is the impact of your work on the software package and/or the broader field. If this is a new package that hasn't been released yet, you can state what the potential impact is.
+
+  * **AI usage disclosure**: describe if and how genAI was used in the software creation, documentation, or paper authoring.
+
+  * **References**: Make sure to cite any references you use.
+
+### Formats
+
+I will accept Word, pdf, LaTeX, or markdown. If LaTeX or markdown, be sure to separately send the figures, so that it can be compiled. You will lose points if I cannot compile the LaTeX into a pdf or the markdown has syntax errors, so make sure you test this yourself (you may just want to send the pdf instead).
+
+### Turning it in
+
+Please email me your final report along with a link to the project GitHub or any other project materials by the end of the day on 12/10.
