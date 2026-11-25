@@ -197,7 +197,7 @@ depends on if you are an undergrad in IST 400 or a grad student in IST 600.
 | 10 | 10/29 | Packaging and deployment 2 |
 | 11 | 11/5 | Continuous integration with GitHub Actions |
 | 12 | 11/12 | Continuous documentation with GitHub Actions |
-| 13 | 11/19 | Choosing a license and building an Open Source ecosystem |
+| 13 | 11/19 | Choosing a license and building an open-source ecosystem |
 | 14 | 11/26 | Thanksgiving - no class |
 | 15 | 12/3  | Project presentations |
 | -- | 12/10 | Grad students: project papers due; All: project completion |

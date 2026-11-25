@@ -27,13 +27,14 @@ Presentations will be 10 minutes + 3 minutes for questions. Your presentation sh
 
 ### Examples
 
-Students gave similar presentations about their OSPO internships in Spring 2026. You can find videos of their presentations along with their slides here: https://opensource.syracuse.edu/events/25-26-internship-presentations/.
+Students gave similar presentations about their OSPO internships in Spring 2026. You can find videos of their presentations along with their slides here:
+[https://opensource.syracuse.edu/events/25-26-internship-presentations/](https://opensource.syracuse.edu/events/25-26-internship-presentations/).
 
 ### Tips
 
-- 10 minutes goes by fast! Aim to have no more than 6 or 7 slides. Any more than that and you'll find that you'll be rushing to get through them.
+- 10 minutes goes by fast! Aim to have no more than 6 or 7 slides. Any more than that and you'll find yourself rushing to get through them.
 
-- Practice your talk ahead of time! Even just one walk-through can make your presentations go much smoother, and give you an idea of how long your talk will actually take. More often than not, you'll find that you have too much material.
+- Practice your talk ahead of time! Even just one walk-through can make your presentations go much smoother, and give you an idea of how long your talk will actually take.
 
 - Send your slides to your mentor ahead of time so they can give you feedback.
 
@@ -65,6 +66,8 @@ Papers should be short, JOSS-like articles that describe your project. Requireme
   * **AI usage disclosure**: describe if and how genAI was used in the software creation, documentation, or paper authoring.
 
   * **References**: Make sure to cite any references you use.
+
+You can find an example JOSS paper [here](https://joss.theoj.org/papers/10.21105/joss.10806).
 
 ### Formats
 
