@@ -335,25 +335,47 @@
     ]
   },
   {
-    "objectID": "03_ai/index.html",
-    "href": "03_ai/index.html",
-    "title": "3. Effective use of AI",
+    "objectID": "07_final/index.html",
+    "href": "07_final/index.html",
+    "title": "Final Evaluation, Presentations, and Papers",
     "section": "",
-    "text": "download PDF\n\nYour browser cannot display PDFs inline. Download the slides instead.",
+    "text": "Please email me your GitHub repos with your work by 12/10. Your project evaluation (24 points) will be based on this and feedback from your project mentor. See the Project Evaluation in the Syllabus for the criteria you will be evaluated on.",
     "crumbs": [
       "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
-      "3. Effective use of AI"
+      "Final Evaluation, Presentations, and Papers"
     ]
   },
   {
-    "objectID": "03_ai/index.html#lecture---10126",
-    "href": "03_ai/index.html#lecture---10126",
-    "title": "3. Effective use of AI",
+    "objectID": "07_final/index.html#final-work",
+    "href": "07_final/index.html#final-work",
+    "title": "Final Evaluation, Presentations, and Papers",
     "section": "",
-    "text": "download PDF\n\nYour browser cannot display PDFs inline. Download the slides instead.",
+    "text": "Please email me your GitHub repos with your work by 12/10. Your project evaluation (24 points) will be based on this and feedback from your project mentor. See the Project Evaluation in the Syllabus for the criteria you will be evaluated on.",
     "crumbs": [
       "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
-      "3. Effective use of AI"
+      "Final Evaluation, Presentations, and Papers"
+    ]
+  },
+  {
+    "objectID": "07_final/index.html#final-presentation-ist-400-and-600",
+    "href": "07_final/index.html#final-presentation-ist-400-and-600",
+    "title": "Final Evaluation, Presentations, and Papers",
+    "section": "Final presentation (IST 400 and 600)",
+    "text": "Final presentation (IST 400 and 600)\nDate: 12/3\nPoints: 12\nPresentations will be 10 minutes + 3 minutes for questions. Your presentation should:\n\nProvide an overview of the project and what the goals were.\nExplain any obstacles you encountered.\nExplain what you accomplished.\nDemonstrate use of some of the concepts we touched on in class, such as proper use of GitHub.\n\n\nExamples\nStudents gave similar presentations about their OSPO internships in Spring 2026. You can find videos of their presentations along with their slides here: https://opensource.syracuse.edu/events/25-26-internship-presentations/.\n\n\nTips\n\n10 minutes goes by fast! Aim to have no more than 6 or 7 slides. Any more than that and you’ll find that you’ll be rushing to get through them.\nPractice your talk ahead of time! Even just one walk-through can make your presentations go much smoother, and give you an idea of how long your talk will actually take. More often than not, you’ll find that you have too much material.\nSend your slides to your mentor ahead of time so they can give you feedback.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "Final Evaluation, Presentations, and Papers"
+    ]
+  },
+  {
+    "objectID": "07_final/index.html#final-papers-ist-600-only",
+    "href": "07_final/index.html#final-papers-ist-600-only",
+    "title": "Final Evaluation, Presentations, and Papers",
+    "section": "Final papers (IST 600 only)",
+    "text": "Final papers (IST 600 only)\nDue: 12/10\nPoints: 12\nPapers should be short, JOSS-like articles that describe your project. Requirements:\n\nLength: the paper should be between 700 and 1800 words.\nIt must have the following sections:\n\nSummary: a description of the work for a non-specialist audience.\nStatement of need: what problem does the software solve?\nState of the field: compare to any existing software. If your project involved adding features to an existing software project, you can limit this to a statement about what the state of the software was before the start of your project.\nSoftware design: explain what you did and your software architecture. Also mention any challenges you had, and how you addressed them.\n\nTip: This is a good place for a figure. Making a diagram can make it much easier to explain the software layout than trying to explain it in words. Make sure to include a caption for your figure and reference it in your main text.\n\nResearch impact statement: what is the impact of your work on the software package and/or the broader field. If this is a new package that hasn’t been released yet, you can state what the potential impact is.\nAI usage disclosure: describe if and how genAI was used in the software creation, documentation, or paper authoring.\nReferences: Make sure to cite any references you use.\n\n\n\nFormats\nI will accept Word, pdf, LaTeX, or markdown. If LaTeX or markdown, be sure to separately send the figures, so that it can be compiled. You will lose points if I cannot compile the LaTeX into a pdf or the markdown has syntax errors, so make sure you test this yourself (you may just want to send the pdf instead).\n\n\nTurning it in\nPlease email me your final report along with a link to the project GitHub or any other project materials by the end of the day on 12/10.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "Final Evaluation, Presentations, and Papers"
     ]
   },
   {
@@ -449,7 +471,7 @@
     "href": "syllabus.html#class-schedule",
     "title": "Syllabus",
     "section": "Class Schedule",
-    "text": "Class Schedule\nNote: schedule subject to change as we progress through the semester.\n\n\n\n\n\n\n\n\nWeek\nDates\nTopic\n\n\n\n\n1\n8/27\nIntro; project selection\n\n\n2\n9/3\nCreating and managing environments\n\n\n3\n9/10\nGit 1: Branches\n\n\n4\n9/17\nGit 2: Merging, rebasing, and fixing merge conflicts\n\n\n5\n9/24\nGit 3: GitHub, remote repositories, and pull requests\n\n\n6\n10/1\nEffective use of AI\n\n\n7\n10/8\nMore AI tips; Collaborating on GitHub\n\n\n8\n10/15\nAnatomy of a software package / Packaging and deployment\n\n\n9\n10/22\nDevelopment day (remote)\n\n\n10\n10/29\nWriting and deploying CI tests via GitHub actions\n\n\n11\n11/5\nCreating a documentation page via GitHub pages\n\n\n12\n11/12\nChoosing an open source license\n\n\n13\n11/19\nDevelopment models / writing a contributing guide\n\n\n14\n11/26\nThanksgiving - no class\n\n\n15\n12/3\nProject presentations\n\n\n–\n12/10\nGrad students: project papers due",
+    "text": "Class Schedule\nNote: schedule subject to change as we progress through the semester.\n\n\n\n\n\n\n\n\nWeek\nDates\nTopic\n\n\n\n\n1\n8/27\nIntro; project selection\n\n\n2\n9/3\nCreating and managing environments\n\n\n3\n9/10\nGit 1: Branches\n\n\n4\n9/17\nGit 2: Merging, rebasing, and fixing merge conflicts\n\n\n5\n9/24\nGit 3: GitHub, remote repositories, and pull requests\n\n\n6\n10/1\nEffective use of AI\n\n\n7\n10/8\nMore AI tips; Collaborating on GitHub\n\n\n8\n10/15\nAnatomy of a software package / Packaging and deployment\n\n\n9\n10/22\nDevelopment day (remote)\n\n\n10\n10/29\nPackaging and deployment 2\n\n\n11\n11/5\nContinuous integration with GitHub Actions\n\n\n12\n11/12\nContinuous documentation with GitHub Actions\n\n\n13\n11/19\nChoosing a license and building an Open Source ecosystem\n\n\n14\n11/26\nThanksgiving - no class\n\n\n15\n12/3\nProject presentations\n\n\n–\n12/10\nGrad students: project papers due; All: project completion",
     "crumbs": [
       "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
       "Syllabus"
@@ -566,6 +588,28 @@
     ]
   },
   {
+    "objectID": "03_ai/index.html",
+    "href": "03_ai/index.html",
+    "title": "3. Effective use of AI",
+    "section": "",
+    "text": "download PDF\n\nYour browser cannot display PDFs inline. Download the slides instead.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "3. Effective use of AI"
+    ]
+  },
+  {
+    "objectID": "03_ai/index.html#lecture---10126",
+    "href": "03_ai/index.html#lecture---10126",
+    "title": "3. Effective use of AI",
+    "section": "",
+    "text": "download PDF\n\nYour browser cannot display PDFs inline. Download the slides instead.",
+    "crumbs": [
+      "<img src='/images/ischool_logo_reverseX2.png' height='30'>",
+      "3. Effective use of AI"
+    ]
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "IST 400/600: Open Source Software Development Practicum",
@@ -584,7 +628,7 @@
     "href": "index.html#class-schedule",
     "title": "IST 400/600: Open Source Software Development Practicum",
     "section": "Class Schedule",
-    "text": "Class Schedule\nNote: schedule subject to change as we progress through the semester.\n\n\n\n\n\n\n\n\nWeek\nDates\nTopic\n\n\n\n\n1\n8/27\nIntro; project selection\n\n\n2\n9/3\nCreating and managing environments\n\n\n3\n9/10\nGit 1: Branches\n\n\n4\n9/17\nGit 2: Merging, rebasing, and fixing merge conflicts\n\n\n5\n9/24\nGit 3: GitHub, remote repositories, and pull requests\n\n\n6\n10/1\nEffective use of AI\n\n\n7\n10/8\nMore AI tips; Collaborating on GitHub\n\n\n8\n10/15\nAnatomy of a software package / Packaging and deployment\n\n\n9\n10/22\nDevelopment day (remote)\n\n\n10\n10/29\nWriting and deploying CI tests via GitHub actions\n\n\n11\n11/5\nCreating a documentation page via GitHub pages\n\n\n12\n11/12\nChoosing an open source license\n\n\n13\n11/19\nDevelopment models / writing a contributing guide\n\n\n14\n11/26\nThanksgiving - no class\n\n\n15\n12/3\nProject presentations\n\n\n–\n12/10\nGrad students: project papers due"
+    "text": "Class Schedule\nNote: schedule subject to change as we progress through the semester.\n\n\n\n\n\n\n\n\nWeek\nDates\nTopic\n\n\n\n\n1\n8/27\nIntro; project selection\n\n\n2\n9/3\nCreating and managing environments\n\n\n3\n9/10\nGit 1: Branches\n\n\n4\n9/17\nGit 2: Merging, rebasing, and fixing merge conflicts\n\n\n5\n9/24\nGit 3: GitHub, remote repositories, and pull requests\n\n\n6\n10/1\nEffective use of AI\n\n\n7\n10/8\nMore AI tips; Collaborating on GitHub\n\n\n8\n10/15\nAnatomy of a software package / Packaging and deployment\n\n\n9\n10/22\nDevelopment day (remote)\n\n\n10\n10/29\nPackaging and deployment 2\n\n\n11\n11/5\nContinuous integration with GitHub Actions\n\n\n12\n11/12\nContinuous documentation with GitHub Actions\n\n\n13\n11/19\nChoosing a license and building an Open Source ecosystem\n\n\n14\n11/26\nThanksgiving - no class\n\n\n15\n12/3\nProject presentations\n\n\n–\n12/10\nGrad students: project papers due; All: project completion"
   },
   {
     "objectID": "index.html#important-dates",

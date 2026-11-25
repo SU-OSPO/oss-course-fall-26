@@ -2,82 +2,86 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/06_open_source_ecosystem/index.html</loc>
-    <lastmod>2026-11-24T21:37:09.274Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.644Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/05_github_actions/tutorial3.html</loc>
-    <lastmod>2026-11-24T21:37:09.274Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.644Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/05_github_actions/tutorial2.html</loc>
-    <lastmod>2026-11-24T21:37:09.274Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.644Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/01_project_management/index.html</loc>
-    <lastmod>2026-11-24T21:37:09.165Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.563Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/04_packaging_deployment/index.html</loc>
-    <lastmod>2026-11-24T21:37:09.273Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.643Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/02_git/cli/exercise3.html</loc>
-    <lastmod>2026-11-24T21:37:09.172Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.568Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/02_git/cli/ssh_setup.html</loc>
-    <lastmod>2026-11-24T21:37:09.177Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.571Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/02_git/desktop/exercise1.html</loc>
-    <lastmod>2026-11-24T21:37:09.177Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.571Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/02_git/desktop/exercise2.html</loc>
-    <lastmod>2026-11-24T21:37:09.178Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.572Z</lastmod>
   </url>
   <url>
-    <loc>https://su-ospo.github.io/oss-course-fall-26/03_ai/index.html</loc>
-    <lastmod>2026-11-24T21:37:09.265Z</lastmod>
+    <loc>https://su-ospo.github.io/oss-course-fall-26/07_final/index.html</loc>
+    <lastmod>2026-11-25T16:42:21.646Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/syllabus.html</loc>
-    <lastmod>2026-11-24T21:37:09.278Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.646Z</lastmod>
+  </url>
+  <url>
+    <loc>https://su-ospo.github.io/oss-course-fall-26/03_ai/index.html</loc>
+    <lastmod>2026-11-25T16:42:21.637Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/index.html</loc>
-    <lastmod>2026-11-24T21:37:09.278Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.646Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/02_git/desktop/exercise3.html</loc>
-    <lastmod>2026-11-24T21:37:09.178Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.572Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/02_git/index.html</loc>
-    <lastmod>2026-11-24T21:37:09.263Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.635Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/02_git/cli/exercise2.html</loc>
-    <lastmod>2026-11-24T21:37:09.172Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.568Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/02_git/cli/exercise1.html</loc>
-    <lastmod>2026-11-24T21:37:09.172Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.568Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/01_project_management/conda.html</loc>
-    <lastmod>2026-11-24T21:37:09.165Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.563Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/01_project_management/conda_install.html</loc>
-    <lastmod>2026-11-24T21:37:09.165Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.563Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/05_github_actions/index.html</loc>
-    <lastmod>2026-11-24T21:37:09.273Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.643Z</lastmod>
   </url>
   <url>
     <loc>https://su-ospo.github.io/oss-course-fall-26/05_github_actions/tutorial1.html</loc>
-    <lastmod>2026-11-24T21:37:09.274Z</lastmod>
+    <lastmod>2026-11-25T16:42:21.644Z</lastmod>
   </url>
 </urlset>
